@@ -16,8 +16,9 @@ const Pagination = ({
   return (
     <div className="pagination">
       <ul className="flex flex-wrap gap-md">
-        {pages.map((page) => (
+        {pages.map((page, index) => (
           <li
+            key={index}
             className={currentPage === page ? "active" : ""}
             onClick={() => handlePageChange(page)}
           >
