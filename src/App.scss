@@ -2,10 +2,6 @@ body{
   background-color: lavenderblush;
 }
 
-section{
-  margin-left: 10px;
-}
-
 img{
   width: 100%;
   object-fit: cover;
@@ -33,6 +29,10 @@ img{
 h2{
   font-size: 28px;
   margin-bottom: 18px;  
+}
+
+li.active{
+  background-color: black !important;
 }
 
 //Header scss
@@ -84,11 +84,34 @@ h2{
     color: white;
     padding: 5px;
   }
-  li.active{
-    background-color: black !important;
-  }
+  
   li:hover{
     background-color: black;
   }
   
+}
+
+//Pagination
+.pagination{
+   margin-left: 500px;
+  ul{
+    list-style-type: none;
+  }
+  li{
+    width: 30px;
+    height: 30px;
+    border: 1px solid gray;
+    margin: 0 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 8px;
+    transition: all ease 0.3s;
+    background-color: orangered;
+    color: whitesmoke;
+  }
+  li:hover{
+    background-color: black;
+  }
 }

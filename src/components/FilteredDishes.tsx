@@ -21,7 +21,7 @@ const FilteredDishes = ({
               className={
                 selectedCategory == category.strCategory ? "active" : ""
               }
-              key={index + 1}
+              key={index}
               onClick={() => changeCategory(category.strCategory)}
             >
               {category.strCategory}
