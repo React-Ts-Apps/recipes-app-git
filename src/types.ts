@@ -3,3 +3,7 @@ export type mealProps = {
   strCategory: string;
   strMeal: string;
 };
+
+export type categoryProps = {
+  strCategory: string;
+};
