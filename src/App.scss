@@ -1,5 +1,5 @@
 body{
-  background-color: lemonchiffon;
+  background-color: lavenderblush;
 }
 
 section{
@@ -12,6 +12,7 @@ img{
 } 
 
 .text-center{
+  width: 50%;
   text-align: center;
 }
 
@@ -57,17 +58,37 @@ h2{
 //Special dishes css
 .special-dishes{
   &-content{
-    max-width: 1200px;
     margin:auto
   }
- 
+
   &-list{
     ul{
       list-style-type: none;
       li{
         width: 20%;
       }
-    }
-  
+    }  
   }
+}
+
+//Categories
+.dish-categories{
+  margin: auto;
+  ul{
+    list-style-type: none;
+  }
+  li{
+    border-radius: 5px;
+    background-color: orangered;
+    transition: background-color 0.3s ease;
+    color: white;
+    padding: 5px;
+  }
+  li.active{
+    background-color: black !important;
+  }
+  li:hover{
+    background-color: black;
+  }
+  
 }

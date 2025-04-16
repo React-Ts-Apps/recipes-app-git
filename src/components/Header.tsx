@@ -1,9 +1,12 @@
+import React from "react";
+
 const Header = () => {
+  console.log("rendered");
   return (
     <div className="header">
       <img src="../../public/pic1.png"></img>
       <div className="header-text">
-        <h2>Its all about good food & taste</h2>
+        <h2>Your food is waiting for you</h2>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio
           necessitatibus dolorum aspernatur voluptatibus. Quam laborum
@@ -13,4 +16,4 @@ const Header = () => {
     </div>
   );
 };
-export default Header;
+export default React.memo(Header);
