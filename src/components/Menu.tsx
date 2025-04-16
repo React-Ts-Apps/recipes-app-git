@@ -1,5 +1,5 @@
 import instance from "../api/axios";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Header from "./Header";
 import FilteredDishes from "./FilteredDishes";
 import { mealProps, categoryProps } from "../types";
@@ -34,16 +34,20 @@ const Menu = () => {
   };
 
   const changeCategory = (val: string) => {
+    setMenu([]);
+    setCurrentPage(1);
     setCategory(val);
   };
 
-  const paginatedItems = () => {
+  const paginatedItems = useMemo(() => {
+    console.log("menu set");
     const firstIndex = currentPage * itemsPerPage - itemsPerPage;
     const lastIndex = Math.min(currentPage * itemsPerPage, menu.length);
     return menu.slice(firstIndex, lastIndex);
-  };
+  }, [currentPage, menu]);
 
   const handlePageChange = (page: number) => {
+    if (page === currentPage) return;
     setCurrentPage(page);
   };
 
@@ -51,7 +55,7 @@ const Menu = () => {
     <div>
       <Header />
       <FilteredDishes
-        filteredDishes={paginatedItems()}
+        filteredDishes={paginatedItems}
         categories={categories}
         changeCategory={changeCategory}
         selectedCategory={category}
