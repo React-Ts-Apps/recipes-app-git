@@ -1,7 +1,6 @@
 import React from "react";
 
 const Header = () => {
-  console.log("rendered");
   return (
     <div className="header">
       <img src="../../public/pic1.png"></img>

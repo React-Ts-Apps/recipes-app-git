@@ -1,17 +1,19 @@
-import { categoryProps, mealProps } from "../types";
-type FilteredDishesProps = {
-  filteredDishes: mealProps[];
-  categories: categoryProps[];
-  selectedCategory: string;
-  changeCategory: (val: string) => void;
-};
+import { useRecipes } from "../context/useRecipes";
+import { useMemo } from "react";
+import Pagination from "./Pagination";
 
-const FilteredDishes = ({
-  filteredDishes,
-  categories,
-  changeCategory,
-  selectedCategory,
-}: FilteredDishesProps) => {
+const FilteredDishes = () => {
+  const itemsPerPage = 8;
+
+  const { categories, changeCategory, selectedCategory, menu, currentPage } =
+    useRecipes();
+
+  const filteredDishes = useMemo(() => {
+    const firstIndex = currentPage * itemsPerPage - itemsPerPage;
+    const lastIndex = Math.min(currentPage * itemsPerPage, menu.length);
+    return menu.slice(firstIndex, lastIndex);
+  }, [currentPage, menu]);
+
   return (
     <div>
       <section className="dish-categories text-center">
@@ -47,6 +49,7 @@ const FilteredDishes = ({
           </div>
         </div>
       </section>
+      <Pagination itemsLength={Math.ceil(menu.length / itemsPerPage)} />
     </div>
   );
 };
