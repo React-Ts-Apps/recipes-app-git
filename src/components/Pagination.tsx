@@ -1,14 +1,11 @@
+import { useRecipes } from "../context/useRecipes";
+
 type pageProps = {
   itemsLength: number;
-  currentPage: number;
-  handlePageChange: (page: number) => void;
 };
 
-const Pagination = ({
-  itemsLength,
-  currentPage,
-  handlePageChange,
-}: pageProps) => {
+const Pagination = ({ itemsLength }: pageProps) => {
+  const { currentPage, handlePageChange } = useRecipes();
   const pages = [];
   for (let i = 1; i <= itemsLength; i++) {
     pages.push(i);
