@@ -41,6 +41,7 @@ li.active{
   position: relative;
   height: 20vh;
   overflow: hidden;
+ 
   &-text{
     max-width: 400px;
     position: absolute;
@@ -82,8 +83,7 @@ li.active{
     overflow: hidden;
     border-radius: 10px 10px 0 0;
   
-    img {
-      
+    img {      
       object-fit: cover;
       display: block;
       border-radius: 10px 10px 0 0;
