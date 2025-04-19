@@ -12,6 +12,10 @@ export const RecipesContextProvider = ({ children }: ChildProps) => {
   const [categories, setCategories] = useState<categoryProps[]>([]);
   const [selectedCategory, setSelectedCategory] = useState("Beef");
   const [currentPage, setCurrentPage] = useState(1);
+  const [showRecipe, setShowRecipe] = useState(false);
+  const [selectedDish, setSelectedDish] = useState<mealProps | undefined>(
+    undefined
+  );
 
   useEffect(() => {
     getByCategory(selectedCategory);
@@ -22,9 +26,10 @@ export const RecipesContextProvider = ({ children }: ChildProps) => {
   }, []);
 
   const getByCategory = (type: string) => {
-    instance
-      .get(`/filter.php?c=${type}`)
-      .then((response) => setMenu(response.data.meals));
+    instance.get(`/filter.php?c=${type}`).then((response) => {
+      console.log(response.data.meals);
+      setMenu(response.data.meals);
+    });
   };
 
   const getAllCategories = () => {
@@ -44,6 +49,16 @@ export const RecipesContextProvider = ({ children }: ChildProps) => {
     setCurrentPage(page);
   };
 
+  const handleShowRecipe = (idMeal?: string) => {
+    if (idMeal) {
+      instance
+        .get(`/lookup.php?i=${idMeal}`)
+        .then((response) => setSelectedDish(response.data.meals[0]));
+    }
+
+    setShowRecipe((prevShowRecipe) => !prevShowRecipe);
+  };
+
   return (
     <RecipesContext.Provider
       value={{
@@ -51,8 +66,11 @@ export const RecipesContextProvider = ({ children }: ChildProps) => {
         categories,
         selectedCategory,
         currentPage,
+        showRecipe,
+        handleShowRecipe,
         changeCategory,
         handlePageChange,
+        selectedDish,
       }}
     >
       {children}

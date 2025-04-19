@@ -6,6 +6,9 @@ type RecipesContextProps = {
   categories: categoryProps[];
   selectedCategory: string;
   currentPage: number;
+  showRecipe: boolean;
+  selectedDish: mealProps;
+  handleShowRecipe: (idMeal?: string) => void;
   changeCategory: (val: string) => void;
   handlePageChange: (page: number) => void;
 };

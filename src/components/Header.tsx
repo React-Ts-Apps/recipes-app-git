@@ -1,9 +1,9 @@
 import React from "react";
-
+import pic1 from "/pic1.png";
 const Header = () => {
   return (
     <div className="header">
-      <img src="../../public/pic1.png"></img>
+      <img src={pic1}></img>
       <div className="header-text">
         <h2>Your food is waiting for you</h2>
         <p>
