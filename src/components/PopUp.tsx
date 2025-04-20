@@ -8,7 +8,8 @@ const PopUp = () => {
       <div className="popup-container">
         {selectedDish && (
           <>
-            <img src={selectedDish.strMealThumb}></img>
+            <img src={selectedDish.strMealThumb} alt="Dish" />
+            <p className="meal-title">{selectedDish.strMeal}</p>
             <div className="popup-container-text">
               <p> {selectedDish.strInstructions}</p>
             </div>

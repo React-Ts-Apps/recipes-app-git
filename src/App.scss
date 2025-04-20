@@ -186,12 +186,17 @@ li.active{
         border-radius: 10px 10px 0 0;
         flex-shrink: 0; // don't let it shrink on overflow
       }
+      .meal-title{
+        font-weight: bold;
+        margin: auto;
+      }
     &-text {
       overflow-y: auto;
       padding: 20px;
       max-height: calc(80vh - 300px); // subtract image height
       font-weight: 100;
       text-align: justify;
+      line-height: 1.25em;
     }
 
     button {
