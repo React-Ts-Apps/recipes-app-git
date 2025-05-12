@@ -6,7 +6,7 @@ Welcome to the **Recipes App** — a sleek and lightweight web app built with **
 
 ## 🌍 Live Demo
 
-🔗 [View Recipes App Live](https://react-ts-apps.github.io/recipes-app-git/)
+🔗 [View Recipes App Live](https://recipes-app-git.onrender.com/)
 
 ---
 
@@ -18,6 +18,7 @@ Welcome to the **Recipes App** — a sleek and lightweight web app built with **
 - 🌐 Fetches recipe data using Axios
 - 💅 Styled with Sass
 - 🧹 Code linting with ESLint
+- 🔗 Deployed in Render
 
 ---
 
@@ -53,5 +54,7 @@ npm run preview
 - Vite 6
 - Axios
 - Sass
+ ### 🔗 8. Deploy
+- Deploy using render. For more details visit: https://render.com/
 
 
