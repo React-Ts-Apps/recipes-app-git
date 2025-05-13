@@ -2,6 +2,7 @@ import { useRecipes } from "../context/useRecipes";
 import { useMemo } from "react";
 import PopUp from "./PopUp";
 import { ITEMS_PER_PAGE as itemsPerPage } from "../constants";
+import SideBar from "./SideBar";
 
 const FilteredDishes = () => {
   const { menu, currentPage, handleShowRecipe, showRecipe } = useRecipes();
@@ -17,6 +18,7 @@ const FilteredDishes = () => {
       {showRecipe && <PopUp />}
       <div className="flex h-[50vh]">
         <section className="pl-50  overflow-y-auto">
+          <SideBar />
           <ul className="p-4 flex flex-wrap justify-start gap-3" role="list">
             {filteredDishes.length ? (
               filteredDishes.map(
