@@ -1,8 +1,8 @@
 import { ReactNode, useEffect, useState } from "react";
 import { RecipesContext } from "./RecipesContext";
-import instance from "../api/axios";
 import { categoryProps, mealProps } from "../types";
 import { useNavigate } from "react-router-dom";
+import { RecipesService } from "../services/RecipesService";
 
 type ChildProps = {
   children: ReactNode;
@@ -20,46 +20,36 @@ export const RecipesContextProvider = ({ children }: ChildProps) => {
 
   const navigate = useNavigate()
 
+  // Load all meal categories
   useEffect(() => {
-    getByCategory(selectedCategory);
-  }, [selectedCategory]);
-
-  useEffect(() => {
-    getAllCategories();
+    RecipesService.getAllCategories().then(setCategories)
   }, []);
 
-  const getByCategory = (type: string) => {
-    instance.get(`/filter.php?c=${type}`).then((response) => {
-      setMenu(response.data.meals);
-    });
-  };
-
-  const getAllCategories = () => {
-    instance
-      .get("/categories.php")
-      .then((response) => setCategories(response.data.categories));
-  };
+  //Load items belongs to selected category
+  useEffect(() => {
+    RecipesService.getByCategory(selectedCategory).then(setMenu)
+  }, [selectedCategory]);
 
   const changeCategory = (val: string) => {
-    if (selectedCategory === val) return
+    if (val === selectedCategory) return
     setMenu([]);
     setCurrentPage(1);
     setSelectedCategory(val);
     navigate(`${val}/page/1`, { replace: true })
-  };
+  }
 
   const handlePageChange = (page: number) => {
+    if (page === currentPage) return
+    console.log(page)
     setCurrentPage(page);
     navigate(`${selectedCategory}/page/${page}`, { replace: true })
   };
 
+  //Show selected recipe in popup
   const handleShowRecipe = (idMeal?: string) => {
     if (idMeal) {
-      instance
-        .get(`/lookup.php?i=${idMeal}`)
-        .then((response) => setSelectedDish(response.data.meals[0]));
+      RecipesService.getMealById(idMeal).then(setSelectedDish)
     }
-
     setShowRecipe((prevShowRecipe) => !prevShowRecipe);
   };
 
