@@ -15,36 +15,34 @@ const FilteredDishes = () => {
   return (
     <div>
       {showRecipe && <PopUp />}
-      <section className="special-dishes">
-        <div className="special-dishes-content text-center">
-          <div className="special-dishes-list">
-            <ul className="flex flex-wrap gap-md" role="list">
-              {filteredDishes.length ? (
-                filteredDishes.map(
-                  (dish) =>
-                    dish && (
-                      <li key={dish.idMeal} role="listitem">
-                        <div className="image-wrapper">
-                          <img src={dish.strMealThumb} />
-                          <div
-                            className="overlay-text"
-                            onClick={() => handleShowRecipe(dish.idMeal)}
-                          >
-                            Click to view
-                          </div>
+      <div className="flex h-[50vh]">
+        <section className="pl-50  overflow-y-auto">
+          <ul className="p-4 flex flex-wrap justify-start gap-3" role="list">
+            {filteredDishes.length ? (
+              filteredDishes.map(
+                (dish) =>
+                  dish && (
+                    <li className="group w-[20%]" key={dish.idMeal} role="listitem">
+                      <div className="relative w-full">
+                        <img src={dish.strMealThumb} alt={dish.strMeal} className="w-full h-auto block" />
+                        <div
+                          className="absolute pl-8 bottom-0 left-0 right-0 bg-black bg-opacity-60 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out rounded-b-lg py-2"
+                          onClick={() => handleShowRecipe(dish.idMeal)}
+                        >
+                          Click to view
                         </div>
+                      </div>
 
-                        <h4>{dish.strMeal}</h4>
-                      </li>
-                    )
-                )
-              ) : (
-                <p>No items available</p>
-              )}
-            </ul>
-          </div>
-        </div>
-      </section>
+                      <h4 className="mt-2 text-sm font-semibold truncate">{dish.strMeal}</h4>
+                    </li>
+                  )
+              )
+            ) : (
+              <p>No items available</p>
+            )}
+          </ul>
+        </section>
+      </div>
     </div>
   );
 };

@@ -10,12 +10,12 @@ const Pagination = () => {
   }
   return (
     <section>
-      <div className="pagination">
-        <ul className="flex flex-wrap gap-md">
+      <div className="pl-50 pr-30">
+        <ul className="flex flex-wrap gap-md justify-center pb-50 mt-10">
           {pages.map((page, index) => (
             <li
               key={index}
-              className={currentPage === page ? "active" : ""}
+              className={`w-[30px] h-[30px] border border-gray-400 mx-1 flex items-center justify-center cursor-pointer p-2 transition-all ease-in-out text-white ${currentPage === page ? "bg-black" : "bg-orange-600 hover:bg-black"}`}
               onClick={() => handlePageChange(page)}
             >
               {page}
