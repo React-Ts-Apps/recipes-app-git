@@ -11,7 +11,7 @@ const PopUp = () => {
         <img
           src={selectedDish.strMealThumb}
           alt={selectedDish.strMeal}
-          className="w-full h-[300px] object-cover rounded-t-lg"
+          className="w-full p-2 h-[300px] object-cover rounded-t-lg"
         />
 
         <h2 className="text-lg font-semibold text-center my-2 px-4">

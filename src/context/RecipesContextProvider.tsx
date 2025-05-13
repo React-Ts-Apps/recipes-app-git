@@ -2,6 +2,7 @@ import { ReactNode, useEffect, useState } from "react";
 import { RecipesContext } from "./RecipesContext";
 import instance from "../api/axios";
 import { categoryProps, mealProps } from "../types";
+import { useNavigate } from "react-router-dom";
 
 type ChildProps = {
   children: ReactNode;
@@ -17,6 +18,8 @@ export const RecipesContextProvider = ({ children }: ChildProps) => {
     undefined
   );
 
+  const navigate = useNavigate()
+
   useEffect(() => {
     getByCategory(selectedCategory);
   }, [selectedCategory]);
@@ -27,7 +30,6 @@ export const RecipesContextProvider = ({ children }: ChildProps) => {
 
   const getByCategory = (type: string) => {
     instance.get(`/filter.php?c=${type}`).then((response) => {
-      console.log(response.data.meals);
       setMenu(response.data.meals);
     });
   };
@@ -39,14 +41,16 @@ export const RecipesContextProvider = ({ children }: ChildProps) => {
   };
 
   const changeCategory = (val: string) => {
+    if (selectedCategory === val) return
     setMenu([]);
     setCurrentPage(1);
     setSelectedCategory(val);
+    navigate(`${val}/page/1`, { replace: true })
   };
 
   const handlePageChange = (page: number) => {
-    if (page === currentPage) return;
     setCurrentPage(page);
+    navigate(`${selectedCategory}/page/${page}`, { replace: true })
   };
 
   const handleShowRecipe = (idMeal?: string) => {
