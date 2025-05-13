@@ -1,4 +1,5 @@
 import "./App.scss";
+import "./App.css";
 import Categories from "./components/Categories";
 import FilteredDishes from "./components/FilteredDishes";
 import Header from "./components/Header";
