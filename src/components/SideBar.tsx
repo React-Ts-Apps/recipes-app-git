@@ -1,8 +1,7 @@
 import { X, Menu } from "lucide-react"
 import { useState } from "react"
 import { useRecipesStore } from "../store/RecipesStore"
-
-const mealHubItems = ['Categories', 'World Flavours', 'Ingredients', 'Random Meal', 'Favourites']
+import { MEAL_HUB_ITEMS as mealHubItems } from "../constants"
 
 const SideBar = () => {
     const [isOpen, setIsOpen] = useState(true)
@@ -21,10 +20,10 @@ const SideBar = () => {
                 <h1 className=" text-xl font-semibold mb-8"> Recipe Hub</h1>
                 <nav className="flex flex-col gap-4 text-gray-700 font-medium cursor-pointer">
                     {
-                        mealHubItems.map((item, index) => (
-                            <div key={index + item} onClick={() => handleHubChange(item)} className={`hover:text-green-500 
-                                ${item === mealHubItem ? "text-red-700" :
-                                    "text-green-900"}`}>{item}</div>
+                        mealHubItems.map(({ label, value }) => (
+                            <div key={value} onClick={() => handleHubChange(value)} className={`hover:text-green-500 
+                                ${value === mealHubItem ? "text-red-700" :
+                                    "text-green-900"}`}>{label}</div>
                         ))
                     }
                 </nav>

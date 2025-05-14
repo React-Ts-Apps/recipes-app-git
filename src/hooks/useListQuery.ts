@@ -5,9 +5,9 @@ import { RecipeServices } from "../services/RecipeServices"
 
 const listQueryFn = (type: ListType) => {
     switch (type) {
-        case 'category': return RecipeServices.getAllCategories;
-        case 'area': return RecipeServices.getAllAreas;
-        case 'ingredient': return RecipeServices.getAllIngredients;
+        case 'categories': return RecipeServices.getAllCategories;
+        case 'areas': return RecipeServices.getAllAreas;
+        case 'ingredients': return RecipeServices.getAllIngredients;
         default: throw new Error('Unknown list type')
     }
 }
@@ -17,6 +17,6 @@ export const useListQuery = <T extends ListType>(type: T) => {
     return useQuery<ListMap[T]>({
         queryKey: [type],
         queryFn: listQueryFn(type),
-        enabled: mealHubItem.toLowerCase() === type,
+        enabled: mealHubItem === type,
     });
 }

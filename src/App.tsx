@@ -6,26 +6,29 @@ import RecipesLoader from "./components/RecipesLoader";
 import { useRecipesStore } from "./store/RecipesStore";
 import SideBar from "./components/SideBar";
 import Categories from "./components/Categories";
+import Areas from "./components/Areas";
 
 const App = () => {
   const { selectedCategory, mealHubItem } = useRecipesStore();
-
+  console.log("Current Meal Hub Item:", mealHubItem);
   return (
     <div>
       <Header />
       <SideBar />
       <BrowserRouter>
-        {mealHubItem === 'Categories' && <Categories />}
+        {mealHubItem === 'categories' && <Categories />}
+        {mealHubItem === 'areas' && <Areas />}
         <Routes>
+
           <Route
             path="/"
-            element={mealHubItem === 'Categories' ? <Navigate to="/Beef/page/1" replace /> : null}
+            element={mealHubItem === 'categories' ? <Navigate to="/Beef/page/1" replace /> : null}
           />
 
           <Route
             path="/:category/page/:page"
             element={
-              mealHubItem === 'Categories' ? (
+              mealHubItem === 'categories' ? (
                 <>
                   <RecipesLoader />
                   <FilteredDishes category={selectedCategory} />
@@ -33,6 +36,7 @@ const App = () => {
               ) : null
             }
           />
+
         </Routes>
       </BrowserRouter>
     </div>

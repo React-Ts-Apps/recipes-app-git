@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import { RecipesStoreState } from '../types'
 
 export const useRecipesStore = create<RecipesStoreState>((set, get) => ({
-    mealHubItem: 'Categories',
+    mealHubItem: 'categories',
 
     selectedCategory: 'Beef',
     selectedArea: '',

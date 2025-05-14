@@ -21,12 +21,12 @@ export type ingredientProps = {
   strIngredient: string;
 };
 
-export type ListType = 'category' | 'area' | 'ingredient';
+export type ListType = 'categories' | 'areas' | 'ingredients';
 
 export type ListMap = {
-  category: categoryProps[];
-  area: areaProps[];
-  ingredient: ingredientProps[];
+  categories: categoryProps[];
+  areas: areaProps[];
+  ingredients: ingredientProps[];
 }
 
 export type RecipesStoreState = {
@@ -43,4 +43,9 @@ export type RecipesStoreState = {
   setCurrentPage: (page: number) => void;
   setMealHubItem: (cat: string) => void;
   handleShowRecipe: (idMeal?: string) => void;
+}
+
+export type ListBaseProps = {
+  type: ListType;
+  onItemClick: (val: string) => void;
 }
