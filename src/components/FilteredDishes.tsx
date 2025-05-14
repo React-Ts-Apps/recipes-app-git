@@ -8,13 +8,16 @@ import Pagination from "./Pagination";
 
 const FilteredDishes = () => {
   const { selectedCategory, currentPage, showRecipe, handleShowRecipe } = useRecipesStore()
-  const { data: menu = [] } = useMealsByCategory(selectedCategory)
+  const { data: menu = [], isLoading, isError } = useMealsByCategory(selectedCategory)
 
   const filteredDishes = useMemo(() => {
     const firstIndex = currentPage * itemsPerPage - itemsPerPage;
     const lastIndex = Math.min(currentPage * itemsPerPage, menu.length);
     return menu.slice(firstIndex, lastIndex);
   }, [currentPage, menu]);
+
+  if (isLoading) return <p>Loading....</p>
+  if (isError) return <p>Something went wrong</p>
 
   return (
     <div>

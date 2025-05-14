@@ -3,9 +3,10 @@ import { useRecipesStore } from "../store/RecipesStore";
 
 const PopUp = () => {
   const { selectedDishId, handleShowRecipe } = useRecipesStore();
-  const { data: selectedDish } = useMealById(selectedDishId)
+  const { data: selectedDish, isLoading, isError } = useMealById(selectedDishId)
 
-  if (!selectedDish) return null;
+  if (!selectedDish || isError) return <p>Something went wrong</p>;
+  if (isLoading) return <p>Loading....</p>
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
