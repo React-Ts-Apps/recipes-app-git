@@ -32,10 +32,14 @@ export type ListMap = {
 export type RecipesStoreState = {
   mealHubItem: string;
   selectedCategory: string;
+  selectedArea: string;
+  selectedIngredient: string;
   currentPage: number;
   selectedDishId: string;
   showRecipe: boolean;
   setSelectedCategory: (category: string) => void;
+  setSelectedArea: (area: string) => void;
+  setSelectedIngredient: (ing: string) => void;
   setCurrentPage: (page: number) => void;
   setMealHubItem: (cat: string) => void;
   handleShowRecipe: (idMeal?: string) => void;

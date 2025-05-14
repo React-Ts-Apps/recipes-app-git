@@ -2,11 +2,15 @@ import { create } from 'zustand'
 import { RecipesStoreState } from '../types'
 
 export const useRecipesStore = create<RecipesStoreState>((set, get) => ({
+    mealHubItem: 'Categories',
+
     selectedCategory: 'Beef',
+    selectedArea: '',
+    selectedIngredient: '',
+
     currentPage: 1,
     selectedDishId: '',
     showRecipe: false,
-    mealHubItem: 'Categories',
 
     setMealHubItem: (item) => set({ mealHubItem: item }),
 
@@ -16,8 +20,18 @@ export const useRecipesStore = create<RecipesStoreState>((set, get) => ({
 
     },
 
+    setSelectedArea: (val) => {
+        if (val === get().selectedArea) return
+        set({ selectedArea: val, currentPage: 1 })
+    },
+
+    setSelectedIngredient: (val) => {
+        if (val === get().selectedIngredient) return
+        set({ selectedIngredient: val, currentPage: 1 })
+    },
+
     setCurrentPage: (val) => {
-        if (get().currentPage === val) return
+        if (val === get().currentPage) return
         set({ currentPage: val });
     },
 
