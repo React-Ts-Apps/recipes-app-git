@@ -2,24 +2,22 @@ import "./App.css";
 import Categories from "./components/Categories";
 import FilteredDishes from "./components/FilteredDishes";
 import Header from "./components/Header";
-import Pagination from "./components/Pagination";
-import { RecipesContextProvider } from "./context/RecipesContextProvider";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import RecipesLoader from "./components/RecipesLoader";
 
 const App = () => {
   return (
     <div>
       <Header />
       <BrowserRouter>
-        <RecipesContextProvider>
-          <Categories />
-          <Routes>
-            <Route path="/:category/page/:page" element={<FilteredDishes />}></Route>
-          </Routes>
-          <Pagination />
-        </RecipesContextProvider>
+        <Categories />
+        <Routes>
+          <Route path="/" element={<Navigate to="/Beef/page/1" replace />} />
+          <Route path="/:category/page/:page"
+            element={<><RecipesLoader /><FilteredDishes /></>}></Route>
+        </Routes>
       </BrowserRouter>
-    </div>
+    </div >
   );
 };
 export default App;
