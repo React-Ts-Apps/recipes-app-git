@@ -8,9 +8,26 @@ export type mealProps =
   }
   | undefined;
 
+
 export type categoryProps = {
   strCategory: string;
 };
+
+export type areaProps = {
+  strArea: string;
+};
+
+export type ingredientProps = {
+  strIngredient: string;
+};
+
+export type ListType = 'category' | 'area' | 'ingredient';
+
+export type ListMap = {
+  category: categoryProps[];
+  area: areaProps[];
+  ingredient: ingredientProps[];
+}
 
 export type RecipesStoreState = {
   mealHubItem: string;

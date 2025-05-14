@@ -1,6 +1,6 @@
 
 import { useNavigate } from "react-router-dom";
-import { useCategories } from "../hooks/recipeQueries";
+import { useCategories } from "../hooks/useFilterQuery";
 import { useRecipesStore } from "../store/RecipesStore";
 
 

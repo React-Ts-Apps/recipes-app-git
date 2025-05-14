@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import PopUp from "./PopUp";
 import { ITEMS_PER_PAGE as itemsPerPage } from "../constants";
-import { useMealsByCategory } from "../hooks/recipeQueries";
+import { useMealsByCategory } from "../hooks/useFilterQuery";
 import { useRecipesStore } from "../store/RecipesStore";
 import Pagination from "./Pagination";
 

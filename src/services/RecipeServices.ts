@@ -2,8 +2,18 @@ import instance from "../api/axios";
 
 export class RecipeServices {
     static async getAllCategories() {
-        const res = await instance.get("categories.php")
-        return res.data.categories
+        const res = await instance.get("list.php?c=list")
+        return res.data.meals
+    }
+
+    static async getAllAreas() {
+        const res = await instance.get("list.php?a=list")
+        return res.data.meals
+    }
+
+    static async getAllIngredients() {
+        const res = await instance.get("list.php?i=list")
+        return res.data.meals
     }
 
     static async getByCategory(category: string) {
