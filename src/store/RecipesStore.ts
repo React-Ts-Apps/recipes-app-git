@@ -6,6 +6,9 @@ export const useRecipesStore = create<RecipesStoreState>((set, get) => ({
     currentPage: 1,
     selectedDishId: '',
     showRecipe: false,
+    mealHubItem: 'Categories',
+
+    setMealHubItem: (item) => set({ mealHubItem: item }),
 
     setSelectedCategory: (val) => {
         if (val === get().selectedCategory) return
