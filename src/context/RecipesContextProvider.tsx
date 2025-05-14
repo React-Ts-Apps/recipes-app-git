@@ -2,7 +2,7 @@ import { ReactNode, useEffect, useState } from "react";
 import { RecipesContext } from "./RecipesContext";
 import { categoryProps, mealProps } from "../types";
 import { useNavigate } from "react-router-dom";
-import { RecipesService } from "../services/RecipesService";
+import { RecipesService } from "../services/RecipeServices";
 
 type ChildProps = {
   children: ReactNode;

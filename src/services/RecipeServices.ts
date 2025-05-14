@@ -1,6 +1,6 @@
 import instance from "../api/axios";
 
-export class RecipesService {
+export class RecipeServices {
     static async getAllCategories() {
         const res = await instance.get("categories.php")
         return res.data.categories
