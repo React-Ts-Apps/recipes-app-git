@@ -1,3 +1,4 @@
+
 export type mealProps =
   | {
     strMealThumb: string;
@@ -28,7 +29,7 @@ export type RecipesStoreState = {
   currentPage: number;
   selectedDishId: string;
   showRecipe: boolean;
-  setSelectedCategory: (cat: string) => void;
+  setSelectedCategory: (category: string) => void;
   setCurrentPage: (page: number) => void;
   handleShowRecipe: (idMeal?: string) => void;
 }
