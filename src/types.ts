@@ -12,24 +12,14 @@ export type categoryProps = {
   strCategory: string;
 };
 
-export type RecipesState = {
-  menu: mealProps[];
-  categories: categoryProps[];
-  selectedCategory: string;
-  currentPage: number;
-  showRecipe: boolean;
-  selectedDish: mealProps;
-  handleShowRecipe: (idMeal?: string) => void;
-  changeCategory: (val: string) => void;
-  handlePageChange: (page: number) => void;
-};
-
 export type RecipesStoreState = {
+  mealHubItem: string;
   selectedCategory: string;
   currentPage: number;
   selectedDishId: string;
   showRecipe: boolean;
   setSelectedCategory: (category: string) => void;
   setCurrentPage: (page: number) => void;
+  setMealHubItem: (cat: string) => void;
   handleShowRecipe: (idMeal?: string) => void;
 }
