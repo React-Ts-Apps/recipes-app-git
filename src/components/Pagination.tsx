@@ -1,9 +1,9 @@
-import { useRecipes } from "../context/useRecipes";
 import { ITEMS_PER_PAGE } from "../constants";
+import { useRecipesStore } from "../store/RecipesStore";
 
-const Pagination = () => {
-  const { currentPage, handlePageChange, menu } = useRecipes();
-  const itemsLength = Math.ceil(menu.length / ITEMS_PER_PAGE);
+const Pagination = ({ menuLength }: { menuLength: number }) => {
+  const { currentPage, setCurrentPage } = useRecipesStore();
+  const itemsLength = Math.ceil(menuLength / ITEMS_PER_PAGE);
   const pages = [];
   for (let i = 1; i <= itemsLength; i++) {
     pages.push(i);
@@ -16,7 +16,7 @@ const Pagination = () => {
             <li
               key={index}
               className={`w-[30px] h-[30px] border border-gray-400 mx-1 flex items-center justify-center cursor-pointer p-2 transition-all ease-in-out text-white ${currentPage === page ? "bg-black" : "bg-orange-600 hover:bg-black"}`}
-              onClick={() => handlePageChange(page)}
+              onClick={() => setCurrentPage(page)}
             >
               {page}
             </li>

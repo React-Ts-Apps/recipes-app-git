@@ -1,7 +1,9 @@
-import { useRecipes } from "../context/useRecipes";
+import { useMealById } from "../hooks/recipeQueries";
+import { useRecipesStore } from "../store/RecipesStore";
 
 const PopUp = () => {
-  const { selectedDish, handleShowRecipe } = useRecipes();
+  const { selectedDishId, handleShowRecipe } = useRecipesStore();
+  const { data: selectedDish } = useMealById(selectedDishId)
 
   if (!selectedDish) return null;
 

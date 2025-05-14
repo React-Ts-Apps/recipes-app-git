@@ -1,6 +1,13 @@
-import { useRecipes } from "../context/useRecipes";
+import { useCategories } from "../hooks/recipeQueries";
+import { useRecipesStore } from "../store/RecipesStore";
+
 const Categories = () => {
-  const { categories, changeCategory, selectedCategory } = useRecipes();
+  const { data: categories = [], isLoading, isError } = useCategories()
+  const { selectedCategory, setSelectedCategory } = useRecipesStore()
+
+  if (isLoading) return <p>Loading...</p>;
+  if (isError) return <p>Something went wrong</p>;
+
   return (
     <section>
       <div className="pl-40 pr-30">
@@ -8,7 +15,7 @@ const Categories = () => {
           {categories.map((category, index) => (
             <li
               key={index}
-              onClick={() => changeCategory(category.strCategory)}
+              onClick={() => setSelectedCategory(category.strCategory)}
               className={`px-4 py-2 rounded text-sm md:text-base font-medium tracking-wide text-white cursor-pointer transition-colors shadow-md hover:shadow-lg
         ${selectedCategory === category.strCategory ? "bg-black" : "bg-orange-600 hover:bg-black"}`}
             >
