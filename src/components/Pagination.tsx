@@ -2,9 +2,11 @@
 import { useNavigate } from "react-router-dom";
 import { ITEMS_PER_PAGE } from "../constants";
 import { useRecipesStore } from "../store/RecipesStore";
+import { useSelectedList } from "../utils/useSelectedList";
 
 const Pagination = ({ menuLength }: { menuLength: number }) => {
-  const { currentPage, setCurrentPage, selectedCategory } = useRecipesStore();
+  const { currentPage, setCurrentPage, mealHubItem } = useRecipesStore();
+  const base = useSelectedList()
   const navigate = useNavigate()
   const itemsLength = Math.ceil(menuLength / ITEMS_PER_PAGE);
   const pages = [];
@@ -14,7 +16,8 @@ const Pagination = ({ menuLength }: { menuLength: number }) => {
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page)
-    navigate(`/${selectedCategory}/page/${page}`, { replace: true })
+
+    navigate(`/${mealHubItem}/${base}/page/${page}`, { replace: true })
   }
 
   return (

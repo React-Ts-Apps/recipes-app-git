@@ -1,12 +1,17 @@
 import { create } from 'zustand'
 import { RecipesStoreState } from '../types'
+import { persist } from 'zustand/middleware';
 
-export const useRecipesStore = create<RecipesStoreState>((set, get) => ({
+export const useRecipesStore = create<RecipesStoreState>()(persist((set, get) => ({
+    mealHubItem: 'categories',
+
     selectedCategory: 'Beef',
+    selectedArea: 'American',
+    selectedIngredient: '',
+
     currentPage: 1,
     selectedDishId: '',
     showRecipe: false,
-    mealHubItem: 'Categories',
 
     setMealHubItem: (item) => set({ mealHubItem: item }),
 
@@ -16,8 +21,18 @@ export const useRecipesStore = create<RecipesStoreState>((set, get) => ({
 
     },
 
+    setSelectedArea: (val) => {
+        if (val === get().selectedArea) return
+        set({ selectedArea: val, currentPage: 1 })
+    },
+
+    setSelectedIngredient: (val) => {
+        if (val === get().selectedIngredient) return
+        set({ selectedIngredient: val, currentPage: 1 })
+    },
+
     setCurrentPage: (val) => {
-        if (get().currentPage === val) return
+        if (val === get().currentPage) return
         set({ currentPage: val });
     },
 
@@ -25,4 +40,10 @@ export const useRecipesStore = create<RecipesStoreState>((set, get) => ({
         showRecipe: !state.showRecipe,
         selectedDishId: idMeal
     }))
+}), {
+    name: 'recipe-hub', partialize: (state) => ({
+        mealHubItem: state.mealHubItem,
+        selectedArea: state.selectedArea,
+        selectedCategory: state.selectedCategory
+    })
 }))

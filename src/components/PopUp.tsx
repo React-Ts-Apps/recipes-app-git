@@ -1,4 +1,4 @@
-import { useMealById } from "../hooks/recipeQueries";
+import { useMealById } from "../hooks/useFilterQuery";
 import { useRecipesStore } from "../store/RecipesStore";
 
 const PopUp = () => {
