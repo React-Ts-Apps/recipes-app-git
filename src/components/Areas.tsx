@@ -4,11 +4,11 @@ import ListBase from "./ListBase"
 
 const Areas = () => {
     const navigate = useNavigate()
-    const { setSelectedArea } = useRecipesStore()
+    const { setSelectedArea, mealHubItem } = useRecipesStore()
 
     function handleChange(areaName: string) {
         setSelectedArea(areaName)
-        navigate(`${areaName}/page/1`, { replace: true })
+        navigate(`/${mealHubItem}/${areaName}/page/1`, { replace: true })
     }
 
     return <ListBase type='areas' onItemClick={(name) => handleChange(name)} />

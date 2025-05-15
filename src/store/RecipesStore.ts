@@ -5,7 +5,7 @@ export const useRecipesStore = create<RecipesStoreState>((set, get) => ({
     mealHubItem: 'categories',
 
     selectedCategory: 'Beef',
-    selectedArea: '',
+    selectedArea: 'American',
     selectedIngredient: '',
 
     currentPage: 1,

@@ -2,14 +2,17 @@ import { X, Menu } from "lucide-react"
 import { useState } from "react"
 import { useRecipesStore } from "../store/RecipesStore"
 import { MEAL_HUB_ITEMS as mealHubItems } from "../constants"
+import { useNavigate } from "react-router-dom"
 
 const SideBar = () => {
     const [isOpen, setIsOpen] = useState(true)
     const { mealHubItem, setMealHubItem } = useRecipesStore()
+    const navigate = useNavigate()
 
     const handleHubChange = (item: string) => {
         if (mealHubItem === item) return
         setMealHubItem(item)
+        navigate('/', { replace: true })
     }
     return (
         <>

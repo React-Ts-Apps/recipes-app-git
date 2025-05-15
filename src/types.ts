@@ -41,7 +41,7 @@ export type RecipesStoreState = {
   setSelectedArea: (area: string) => void;
   setSelectedIngredient: (ing: string) => void;
   setCurrentPage: (page: number) => void;
-  setMealHubItem: (cat: string) => void;
+  setMealHubItem: (type: RecipesStoreState['mealHubItem']) => void;
   handleShowRecipe: (idMeal?: string) => void;
 }
 

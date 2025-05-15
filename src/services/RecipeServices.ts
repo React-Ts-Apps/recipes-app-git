@@ -21,6 +21,16 @@ export class RecipeServices {
         return res.data.meals
     }
 
+    static async getByArea(area: string) {
+        const res = await instance.get(`/filter.php?a=${area}`)
+        return res.data.meals
+    }
+
+    static async getByIngredient(ing: string) {
+        const res = await instance.get(`/filter.php?i=${ing}`)
+        return res.data.meals
+    }
+
     static async getMealById(id: string) {
         const res = await instance.get(`/lookup.php?i=${id}`)
         return res.data.meals[0]
