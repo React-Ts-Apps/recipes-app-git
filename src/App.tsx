@@ -6,7 +6,7 @@ import { useRecipesStore } from "./store/RecipesStore";
 import SideBar from "./components/SideBar";
 import Categories from "./components/Categories";
 import Areas from "./components/Areas";
-import MenuListBase from "./components/MenuListBase";
+import MealListBase from "./components/MealListBase";
 
 const App = () => {
   const { selectedCategory, selectedArea, mealHubItem } = useRecipesStore();
@@ -34,7 +34,7 @@ const App = () => {
               mealHubItem === "categories" ? (
                 <>
                   <RecipesLoader />
-                  <MenuListBase type="categories" selectedValue={selectedCategory} />
+                  <MealListBase type="categories" selectedValue={selectedCategory} />
                 </>
               ) : null
             }
@@ -46,7 +46,7 @@ const App = () => {
               mealHubItem === "areas" ? (
                 <>
                   <RecipesLoader />
-                  <MenuListBase type="areas" selectedValue={selectedArea} />
+                  <MealListBase type="areas" selectedValue={selectedArea} />
                 </>
               ) : null
             }

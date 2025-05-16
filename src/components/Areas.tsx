@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import { useRecipesStore } from "../store/RecipesStore"
-import ListBase from "./ListBase"
+import MealGroups from "./MealGroups"
 
 const Areas = () => {
     const navigate = useNavigate()
@@ -11,6 +11,6 @@ const Areas = () => {
         navigate(`/${mealHubItem}/${areaName}/page/1`, { replace: true })
     }
 
-    return <ListBase type='areas' onItemClick={(name) => handleChange(name)} />
+    return <MealGroups type='areas' onItemClick={(name) => handleChange(name)} />
 }
 export default Areas

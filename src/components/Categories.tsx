@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useRecipesStore } from "../store/RecipesStore";
-import ListBase from "./ListBase";
-
+import MealGroups from "./MealGroups";
 
 const Categories = () => {
   const navigate = useNavigate();
@@ -13,7 +12,7 @@ const Categories = () => {
   }
 
   return (
-    <ListBase type="categories" onItemClick={(name) => handleCategoryChange(name)} />
+    <MealGroups type="categories" onItemClick={(name) => handleCategoryChange(name)} />
   );
 };
 export default Categories;

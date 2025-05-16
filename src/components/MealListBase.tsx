@@ -1,16 +1,16 @@
 import { useMemo } from "react";
 import { useFilterByTypeQuery } from "../hooks/useFilterByTypeQuery";
 import { useRecipesStore } from "../store/RecipesStore";
-import { ListType } from "../types"
+import { MealHubListKeyProps } from "../types"
 import Pagination from "./Pagination";
 import PopUp from "./PopUp";
 import { ITEMS_PER_PAGE as itemsPerPage } from "../constants";
 
 type ListBaseProps = {
-    type: ListType;
+    type: MealHubListKeyProps;
     selectedValue: string;
 }
-const MenuListBase = ({ type, selectedValue }: ListBaseProps) => {
+const MealListBase = ({ type, selectedValue }: ListBaseProps) => {
     const { data: menu = [], isLoading, isError } = useFilterByTypeQuery(type, selectedValue)
 
     const { currentPage, showRecipe, handleShowRecipe } = useRecipesStore()
@@ -60,4 +60,4 @@ const MenuListBase = ({ type, selectedValue }: ListBaseProps) => {
         </div>
     );
 };
-export default MenuListBase
+export default MealListBase

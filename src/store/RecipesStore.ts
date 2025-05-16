@@ -39,7 +39,8 @@ export const useRecipesStore = create<RecipesStoreState>()(persist((set, get) =>
     handleShowRecipe: (idMeal) => set((state) => ({
         showRecipe: !state.showRecipe,
         selectedDishId: idMeal
-    }))
+    }
+    )),
 }), {
     name: 'recipe-hub', partialize: (state) => ({
         mealHubItem: state.mealHubItem,

@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query"
-import { ListMap, ListType } from "../types"
+import { MealHubList, MealHubListKeyProps } from "../types"
 import { useRecipesStore } from "../store/RecipesStore"
 import { RecipeServices } from "../services/RecipeServices"
 
-const listQueryFn = (type: ListType) => {
+const listQueryFn = (type: MealHubListKeyProps) => {
     switch (type) {
         case 'categories': return RecipeServices.getAllCategories;
         case 'areas': return RecipeServices.getAllAreas;
@@ -12,10 +12,10 @@ const listQueryFn = (type: ListType) => {
     }
 }
 
-export const useListQuery = <T extends ListType>(type: T) => {
+export const useListQuery = <T extends MealHubListKeyProps>(type: T) => {
     const { mealHubItem } = useRecipesStore()
-    return useQuery<ListMap[T]>({
-        queryKey: [type],
+    return useQuery<MealHubList[T]>({
+        queryKey: ["groups", type],
         queryFn: listQueryFn(type),
         enabled: mealHubItem === type,
     });
