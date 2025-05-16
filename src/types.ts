@@ -1,10 +1,17 @@
 
 export type mealProps =
   | {
-    strMealThumb: string;
     strMeal: string;
     idMeal: string;
+    strMealThumb: string;
     strInstructions?: string;
+    strCategory: string;
+    strArea: string;
+    strTags?: string;
+    strYoutube?: string;
+    strSource?: string;
+    [key: `strIngredient${number}`]: string | null;
+    [key: `strMeasure${number}`]: string | null;
   }
   | undefined;
 
@@ -44,6 +51,8 @@ export type RecipesStoreState = {
   currentPage: number;
   selectedDishId: string;
   showRecipe: boolean;
+  selectedDish: mealProps;
+  setSelectedDish: (dish: mealProps) => void;
   setSelectedCategory: (category: string) => void;
   setSelectedArea: (area: string) => void;
   setSelectedIngredient: (ing: string) => void;

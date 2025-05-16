@@ -8,12 +8,14 @@ export const useRecipesStore = create<RecipesStoreState>()(persist((set, get) =>
     selectedCategory: 'Beef',
     selectedArea: 'American',
     selectedIngredient: '',
-
+    selectedDish: undefined,
     currentPage: 1,
     selectedDishId: '',
     showRecipe: false,
 
     setMealHubItem: (item) => set({ mealHubItem: item }),
+
+    setSelectedDish: (meal) => set({ selectedDish: meal }),
 
     setSelectedCategory: (val) => {
         if (val === get().selectedCategory) return
