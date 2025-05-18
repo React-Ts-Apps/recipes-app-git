@@ -55,6 +55,7 @@ const App = () => {
           />
 
           <Route path='/random' element={<MealDetails />} />
+          <Route path='/view/:id' element={<MealDetails />} />
         </Routes>
       </BrowserRouter>
     </div>

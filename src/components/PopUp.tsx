@@ -1,12 +1,20 @@
+import { useNavigate } from "react-router-dom";
 import { useMealById } from "../hooks/useFilterQuery";
 import { useRecipesStore } from "../store/RecipesStore";
 
 const PopUp = () => {
-  const { selectedDishId, handleShowRecipe } = useRecipesStore();
+  const { selectedDishId, handleShowRecipe, setSelectedDish } = useRecipesStore();
   const { data: selectedDish, isLoading, isError } = useMealById(selectedDishId)
+  const navigate = useNavigate()
 
   if (!selectedDish || isError) return <p>Something went wrong</p>;
   if (isLoading) return <p>Loading....</p>
+
+  const handleShowFullRecipe = () => {
+    setSelectedDish(selectedDish)
+    handleShowRecipe()
+    navigate(`/view/${selectedDishId}`)
+  }
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
@@ -25,12 +33,18 @@ const PopUp = () => {
           {selectedDish.strInstructions}
         </div>
 
-        <div className="flex justify-end px-6 py-3">
+        <div className="flex justify-end gap-1 px-6 py-3">
           <button
             onClick={() => handleShowRecipe()}
-            className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-md transition"
+            className="bg-gray-600 hover:bg-orange-600 text-white px-4 py-2 rounded-md transition"
           >
             Close
+          </button>
+          <button
+            onClick={() => handleShowFullRecipe()}
+            className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-md transition"
+          >
+            View Full Recipe
           </button>
         </div>
       </div>

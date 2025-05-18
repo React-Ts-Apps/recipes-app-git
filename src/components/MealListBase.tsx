@@ -5,6 +5,7 @@ import { MealHubListKeyProps } from "../types"
 import Pagination from "./Pagination";
 import PopUp from "./PopUp";
 import { ITEMS_PER_PAGE as itemsPerPage } from "../constants";
+import { Link } from "react-router-dom";
 
 type ListBaseProps = {
     type: MealHubListKeyProps;
@@ -13,7 +14,7 @@ type ListBaseProps = {
 const MealListBase = ({ type, selectedValue }: ListBaseProps) => {
     const { data: menu = [], isLoading, isError } = useFilterByTypeQuery(type, selectedValue)
 
-    const { currentPage, showRecipe, handleShowRecipe } = useRecipesStore()
+    const { currentPage, showRecipe, handleShowRecipe, setSelectedDishId } = useRecipesStore()
     const menuList = useMemo(() => {
         const firstIndex = currentPage * itemsPerPage - itemsPerPage;
         const lastIndex = Math.min(currentPage * itemsPerPage, menu.length);
@@ -38,14 +39,18 @@ const MealListBase = ({ type, selectedValue }: ListBaseProps) => {
                                                 <div className="relative w-full">
                                                     <img src={dish.strMealThumb} alt={dish.strMeal} className="w-full h-auto block" />
                                                     <div
-                                                        className="absolute pl-8 bottom-0 left-0 right-0 bg-black bg-opacity-60 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out rounded-b-lg py-2"
+                                                        className="absolute cursor-pointer pl-8 bottom-4 left-0 right-0 bg-black bg-opacity-60 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out rounded-b-lg py-2"
                                                         onClick={() => handleShowRecipe(dish.idMeal)}
                                                     >
                                                         Click to view
                                                     </div>
                                                 </div>
 
-                                                <h4 className="mt-2 text-sm font-semibold truncate">{dish.strMeal}</h4>
+                                                <Link to={`/view/${dish.idMeal}`} onClick={() => setSelectedDishId(dish.idMeal)}>
+                                                    <h4 className="mt-2 text-sm font-semibold truncate hover:text-orange-600 transition">
+                                                        {dish.strMeal}
+                                                    </h4>
+                                                </Link>
                                             </li>
                                         )
                                 )
