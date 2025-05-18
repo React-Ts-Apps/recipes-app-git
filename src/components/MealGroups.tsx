@@ -1,10 +1,10 @@
 import { useListQuery } from "../hooks/useListQuery"
-import { areaProps, categoryProps, ingredientProps, ListBaseProps } from "../types"
+import { areaProps, categoryProps, ingredientProps, MealHubListProps } from "../types"
 import { useSelectedList } from "../utils/useSelectedList"
 
-const ListBase = ({ type, onItemClick }: ListBaseProps) => {
+const MealGroups = ({ type, onItemClick }: MealHubListProps) => {
     const selectedList = useSelectedList()
-    const { data = [], isError, isLoading } = useListQuery(type)
+    const { data: groups = [], isError, isLoading } = useListQuery(type)
 
     if (isLoading) return <p>Loading...</p>
     if (isError) return <p>Something went wrong...</p>
@@ -20,7 +20,7 @@ const ListBase = ({ type, onItemClick }: ListBaseProps) => {
         <section>
             <div className="pl-40 pr-30">
                 <ul className="p-4 flex flex-wrap gap-3 justify-center w-full" role="list">
-                    {data.map((item, index) => {
+                    {groups.map((item, index) => {
                         const name = extractName(item);
                         return (
                             < li
@@ -40,4 +40,4 @@ const ListBase = ({ type, onItemClick }: ListBaseProps) => {
     )
 
 }
-export default ListBase
+export default MealGroups

@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { RecipeServices } from "../services/RecipeServices";
-import { ListType, mealProps } from "../types";
+import { MealHubListKeyProps, mealProps } from "../types";
 
-const getQueryFn = (type: ListType, value: string) => {
+const getQueryFn = (type: MealHubListKeyProps, value: string) => {
     switch (type) {
         case 'categories': return () => RecipeServices.getByCategory(value);
         case 'areas': return () => RecipeServices.getByArea(value);
@@ -11,7 +11,7 @@ const getQueryFn = (type: ListType, value: string) => {
     }
 };
 
-export const useFilterByTypeQuery = (filterType: ListType, value: string) => {
+export const useFilterByTypeQuery = (filterType: MealHubListKeyProps, value: string) => {
     return useQuery<mealProps[]>({
         queryKey: ["menu", filterType, value],
         queryFn: getQueryFn(filterType, value),

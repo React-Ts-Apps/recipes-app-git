@@ -1,10 +1,17 @@
 
 export type mealProps =
   | {
-    strMealThumb: string;
     strMeal: string;
     idMeal: string;
+    strMealThumb: string;
     strInstructions?: string;
+    strCategory: string;
+    strArea: string;
+    strTags?: string;
+    strYoutube?: string;
+    strSource?: string;
+    [key: `strIngredient${number}`]: string | null;
+    [key: `strMeasure${number}`]: string | null;
   }
   | undefined;
 
@@ -21,12 +28,19 @@ export type ingredientProps = {
   strIngredient: string;
 };
 
-export type ListType = 'categories' | 'areas' | 'ingredients';
+export type MealHubProps = 'categories' | 'areas' | 'ingredients' | 'random';
 
-export type ListMap = {
+export type MealHubList = {
   categories: categoryProps[];
   areas: areaProps[];
   ingredients: ingredientProps[];
+}
+
+export type MealHubListKeyProps = keyof MealHubList;
+
+export type MealHubListProps = {
+  type: MealHubListKeyProps;
+  onItemClick: (val: string) => void;
 }
 
 export type RecipesStoreState = {
@@ -37,6 +51,8 @@ export type RecipesStoreState = {
   currentPage: number;
   selectedDishId: string;
   showRecipe: boolean;
+  selectedDish: mealProps;
+  setSelectedDish: (dish: mealProps) => void;
   setSelectedCategory: (category: string) => void;
   setSelectedArea: (area: string) => void;
   setSelectedIngredient: (ing: string) => void;
@@ -45,7 +61,3 @@ export type RecipesStoreState = {
   handleShowRecipe: (idMeal?: string) => void;
 }
 
-export type ListBaseProps = {
-  type: ListType;
-  onItemClick: (val: string) => void;
-}

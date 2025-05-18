@@ -6,7 +6,8 @@ import { useRecipesStore } from "./store/RecipesStore";
 import SideBar from "./components/SideBar";
 import Categories from "./components/Categories";
 import Areas from "./components/Areas";
-import MenuListBase from "./components/MenuListBase";
+import MealListBase from "./components/MealListBase";
+import MealDetails from "./components/MealDetails";
 
 const App = () => {
   const { selectedCategory, selectedArea, mealHubItem } = useRecipesStore();
@@ -14,6 +15,7 @@ const App = () => {
   const getRedirectPath = () => {
     if (mealHubItem === "categories" && selectedCategory) return `/categories/${selectedCategory}/page/1`;
     if (mealHubItem === "areas" && selectedArea) return `/areas/${selectedArea}/page/1`;
+    if (mealHubItem === 'random') return '/random';
     return "/";
   };
 
@@ -34,7 +36,7 @@ const App = () => {
               mealHubItem === "categories" ? (
                 <>
                   <RecipesLoader />
-                  <MenuListBase type="categories" selectedValue={selectedCategory} />
+                  <MealListBase type="categories" selectedValue={selectedCategory} />
                 </>
               ) : null
             }
@@ -46,11 +48,13 @@ const App = () => {
               mealHubItem === "areas" ? (
                 <>
                   <RecipesLoader />
-                  <MenuListBase type="areas" selectedValue={selectedArea} />
+                  <MealListBase type="areas" selectedValue={selectedArea} />
                 </>
               ) : null
             }
           />
+
+          <Route path='/random' element={<MealDetails />} />
         </Routes>
       </BrowserRouter>
     </div>

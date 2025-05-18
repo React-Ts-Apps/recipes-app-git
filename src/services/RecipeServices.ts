@@ -35,4 +35,9 @@ export class RecipeServices {
         const res = await instance.get(`/lookup.php?i=${id}`)
         return res.data.meals[0]
     }
+
+    static async getRandomMeal() {
+        const res = await instance.get('/random.php')
+        return res.data.meals[0]
+    }
 }

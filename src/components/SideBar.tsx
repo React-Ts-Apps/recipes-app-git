@@ -1,18 +1,35 @@
 import { X, Menu } from "lucide-react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useRecipesStore } from "../store/RecipesStore"
 import { MEAL_HUB_ITEMS as mealHubItems } from "../constants"
 import { useNavigate } from "react-router-dom"
+import { useRandomMeal } from "../hooks/useFilterQuery"
 
 const SideBar = () => {
     const [isOpen, setIsOpen] = useState(true)
-    const { mealHubItem, setMealHubItem } = useRecipesStore()
+    const { mealHubItem, setMealHubItem, setSelectedDish } = useRecipesStore()
     const navigate = useNavigate()
+
+    //trigger only if random selected
+    const { data: random, isLoading, isError } = useRandomMeal()
+
+    useEffect(() => {
+        if (mealHubItem === 'random') {
+            if (isLoading) console.log('Loading...')
+            else if (isError) console.log('Something went wrong')
+            else if (random) {
+                setSelectedDish(random)
+                console.log(random)
+                navigate('/random', { replace: true })
+            }
+        }
+    }, [isError, isLoading, mealHubItem, navigate, random, setSelectedDish])
 
     const handleHubChange = (item: string) => {
         if (mealHubItem === item) return
         setMealHubItem(item)
-        navigate('/', { replace: true })
+        if (item !== 'random')
+            navigate('/', { replace: true })
     }
     return (
         <>
