@@ -52,6 +52,7 @@ export type RecipesStoreState = {
   selectedDishId: string;
   showRecipe: boolean;
   selectedDish: mealProps;
+  setSelectedDishId: (id: string) => void;
   setSelectedDish: (dish: mealProps) => void;
   setSelectedCategory: (category: string) => void;
   setSelectedArea: (area: string) => void;

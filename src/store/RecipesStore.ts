@@ -17,6 +17,8 @@ export const useRecipesStore = create<RecipesStoreState>()(persist((set, get) =>
 
     setSelectedDish: (meal) => set({ selectedDish: meal }),
 
+    setSelectedDishId: (id) => set({ selectedDishId: id }),
+
     setSelectedCategory: (val) => {
         if (val === get().selectedCategory) return
         set({ selectedCategory: val, currentPage: 1 });

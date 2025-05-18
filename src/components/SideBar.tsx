@@ -19,7 +19,6 @@ const SideBar = () => {
             else if (isError) console.log('Something went wrong')
             else if (random) {
                 setSelectedDish(random)
-                console.log(random)
                 navigate('/random', { replace: true })
             }
         }

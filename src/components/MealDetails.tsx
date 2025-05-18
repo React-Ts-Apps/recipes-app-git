@@ -1,8 +1,17 @@
+import { useParams } from "react-router-dom";
 import { useRecipesStore } from "../store/RecipesStore";
+import { useMealById } from "../hooks/useFilterQuery";
 
 
 const MealDetails = () => {
-    const { selectedDish: meal } = useRecipesStore()
+    const { selectedDish } = useRecipesStore()
+
+    const { id } = useParams()
+    const shouldFetch = !selectedDish || (id && selectedDish.idMeal !== id)
+    const { data: fetchedData, isError, isLoading } = useMealById(id!)
+    if (isError) return <p>Something went wrong!</p>
+    if (isLoading) return <p>Loding....</p>
+    const meal = shouldFetch ? fetchedData : selectedDish
 
     return (
         meal &&
@@ -22,7 +31,7 @@ const MealDetails = () => {
                     <p><strong>Area:</strong> {meal.strArea}</p>
 
                     <h2 className="text-xl mt-4 mb-2 font-extrabold">Ingredients</h2>
-                    <ul className="list-disc list-inside text-sky-700">
+                    <ol className="list-disc list-inside text-sky-700">
                         {[...Array(20)].map((_, i) => {
                             const ingredient = meal[`strIngredient${i + 1}`];
                             const measure = meal[`strMeasure${i + 1}`];
@@ -30,7 +39,7 @@ const MealDetails = () => {
                                 <li key={i}>{ingredient}{measure ? `: ${measure}` : ''}</li>
                             ) : null;
                         })}
-                    </ul>
+                    </ol>
                 </div>
             </div>
 
