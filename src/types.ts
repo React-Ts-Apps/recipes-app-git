@@ -25,7 +25,11 @@ export type areaProps = {
 };
 
 export type ingredientProps = {
+  idIngredient: string;
   strIngredient: string;
+  strDescription: string;
+  strType: string;
+  imgSrc: string;
 };
 
 export type MealHubProps = 'categories' | 'areas' | 'ingredients' | 'random';
@@ -43,15 +47,27 @@ export type MealHubListProps = {
   onItemClick: (val: string) => void;
 }
 
+export type ListBaseProps = {
+  type: MealHubListKeyProps;
+}
+
+export type PopUpProps = {
+  id: string;
+  description: string;
+  imgSrc: string;
+  type: string;
+  name: string;
+}
+
 export type RecipesStoreState = {
   mealHubItem: string;
   selectedCategory: string;
   selectedArea: string;
-  selectedIngredient: string;
   currentPage: number;
   selectedDishId: string;
-  showRecipe: boolean;
+  showPopUp: boolean;
   selectedDish: mealProps;
+  selectedIngredient: string;
   setSelectedDishId: (id: string) => void;
   setSelectedDish: (dish: mealProps) => void;
   setSelectedCategory: (category: string) => void;
@@ -59,6 +75,7 @@ export type RecipesStoreState = {
   setSelectedIngredient: (ing: string) => void;
   setCurrentPage: (page: number) => void;
   setMealHubItem: (type: RecipesStoreState['mealHubItem']) => void;
-  handleShowRecipe: (idMeal?: string) => void;
+  handleShowPopUp: (idMeal?: string) => void;
+  closePopUp: () => void;
 }
 

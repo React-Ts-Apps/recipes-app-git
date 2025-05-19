@@ -11,7 +11,7 @@ export const useRecipesStore = create<RecipesStoreState>()(persist((set, get) =>
     selectedDish: undefined,
     currentPage: 1,
     selectedDishId: '',
-    showRecipe: false,
+    showPopUp: false,
 
     setMealHubItem: (item) => set({ mealHubItem: item }),
 
@@ -40,15 +40,21 @@ export const useRecipesStore = create<RecipesStoreState>()(persist((set, get) =>
         set({ currentPage: val });
     },
 
-    handleShowRecipe: (idMeal) => set((state) => ({
-        showRecipe: !state.showRecipe,
+    handleShowPopUp: (idMeal) => set(() => ({
+        showPopUp: true,
         selectedDishId: idMeal
     }
     )),
+
+    closePopUp: () => set(() => ({
+        showPopUp: false
+    }))
 }), {
     name: 'recipe-hub', partialize: (state) => ({
         mealHubItem: state.mealHubItem,
         selectedArea: state.selectedArea,
-        selectedCategory: state.selectedCategory
+        selectedCategory: state.selectedCategory,
+        selectedIngredient: state.selectedIngredient,
+        currentPage: state.currentPage
     })
 }))

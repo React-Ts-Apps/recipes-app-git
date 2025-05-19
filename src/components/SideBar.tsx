@@ -25,10 +25,8 @@ const SideBar = () => {
     }, [isError, isLoading, mealHubItem, navigate, random, setSelectedDish])
 
     const handleHubChange = (item: string) => {
-        if (mealHubItem === item) return
-        setMealHubItem(item)
-        if (item !== 'random')
-            navigate('/', { replace: true })
+        if (mealHubItem !== item) setMealHubItem(item)
+        navigate('/', { replace: true })
     }
     return (
         <>

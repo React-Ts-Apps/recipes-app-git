@@ -1,21 +1,22 @@
 import "./App.css";
 import Header from "./components/Header";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import RecipesLoader from "./components/RecipesLoader";
 import { useRecipesStore } from "./store/RecipesStore";
 import SideBar from "./components/SideBar";
 import Categories from "./components/Categories";
 import Areas from "./components/Areas";
 import MealListBase from "./components/MealListBase";
 import MealDetails from "./components/MealDetails";
+import IngredientList from "./components/IngredientList";
+import RecipeByIngredient from "./components/RecipeByIngredient";
 
 const App = () => {
   const { selectedCategory, selectedArea, mealHubItem } = useRecipesStore();
-
   const getRedirectPath = () => {
     if (mealHubItem === "categories" && selectedCategory) return `/categories/${selectedCategory}/page/1`;
     if (mealHubItem === "areas" && selectedArea) return `/areas/${selectedArea}/page/1`;
     if (mealHubItem === 'random') return '/random';
+    if (mealHubItem === 'ingredients') return '/ingredients'
     return "/";
   };
 
@@ -26,7 +27,6 @@ const App = () => {
         <SideBar />
         {mealHubItem === "categories" && <Categories />}
         {mealHubItem === "areas" && <Areas />}
-
         <Routes>
           <Route path="/" element={<Navigate to={getRedirectPath()} replace />} />
 
@@ -34,10 +34,7 @@ const App = () => {
             path="/categories/:category/page/:page"
             element={
               mealHubItem === "categories" ? (
-                <>
-                  <RecipesLoader />
-                  <MealListBase type="categories" selectedValue={selectedCategory} />
-                </>
+                <MealListBase type="categories" />
               ) : null
             }
           />
@@ -46,16 +43,22 @@ const App = () => {
             path="/areas/:area/page/:page"
             element={
               mealHubItem === "areas" ? (
-                <>
-                  <RecipesLoader />
-                  <MealListBase type="areas" selectedValue={selectedArea} />
-                </>
+                <MealListBase type="areas" />
               ) : null
             }
           />
 
           <Route path='/random' element={<MealDetails />} />
           <Route path='/view/:id' element={<MealDetails />} />
+          <Route path='/ingredients' element={<IngredientList type="ingredients" />} />
+          <Route
+            path="/ingredients/:ingredient/page/:page"
+            element={
+              mealHubItem === "ingredients" ? (
+                <RecipeByIngredient />
+              ) : null
+            }
+          />
         </Routes>
       </BrowserRouter>
     </div>
