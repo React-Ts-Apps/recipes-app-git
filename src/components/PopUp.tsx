@@ -4,11 +4,9 @@ import { useRecipesStore } from "../store/RecipesStore";
 import { PopUpProps } from "../types";
 
 const PopUp = ({ dataToPopUp }: { dataToPopUp?: PopUpProps }) => {
-
-  const { selectedDishId, handleShowPopUp, setSelectedDish } = useRecipesStore();
+  const { selectedDishId, setSelectedDish, setSelectedIngredient, closePopUp, currentPage } = useRecipesStore();
   const { data: selectedDish, isLoading, isError } = useMealById(selectedDishId)
   const navigate = useNavigate()
-  console.log(dataToPopUp)
   const popUpData = dataToPopUp || (selectedDish &&
   {
     id: selectedDish.idMeal,
@@ -18,13 +16,19 @@ const PopUp = ({ dataToPopUp }: { dataToPopUp?: PopUpProps }) => {
     type: selectedDish.strCategory
   })
 
-  if (!popUpData || isError) return <p>Something went wrong</p>;
+  if (!popUpData || isError) return <p>Something went wrong in popup</p>;
   if (isLoading) return <p>Loading....</p>
 
   const handleShowFullRecipe = () => {
     setSelectedDish(selectedDish)
-    handleShowPopUp()
-    navigate(`/view/${selectedDishId}`)
+    closePopUp()
+    navigate(`/view/${selectedDishId}`, { replace: true })
+  }
+
+  const handleShowList = (ingredient: string) => {
+    setSelectedIngredient(ingredient)
+    closePopUp()
+    navigate(`/ingredients/${ingredient}/page/${currentPage}`, { replace: true })
   }
 
   return (
@@ -47,17 +51,22 @@ const PopUp = ({ dataToPopUp }: { dataToPopUp?: PopUpProps }) => {
 
         <div className="flex justify-end gap-1 px-6 py-3">
           <button
-            onClick={() => handleShowPopUp()}
+            onClick={() => closePopUp()}
             className="bg-gray-600 hover:bg-orange-600 text-white px-4 py-2 rounded-md transition"
           >
             Close
           </button>
-          <button
+          {dataToPopUp ? <button
+            onClick={() => handleShowList(popUpData.name)}
+            className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-md transition"
+          >
+            View Recipes
+          </button> : <button
             onClick={() => handleShowFullRecipe()}
             className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-md transition"
           >
             View Full Recipe
-          </button>
+          </button>}
         </div>
       </div>
     </div>

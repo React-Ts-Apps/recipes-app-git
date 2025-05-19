@@ -6,12 +6,14 @@ import Pagination from "./Pagination";
 import PopUp from "./PopUp";
 import { ITEMS_PER_PAGE as itemsPerPage } from "../constants";
 import { Link } from "react-router-dom";
+import { useSelectedList } from "../utils/useSelectedList";
 
 
-const MealListBase = ({ type, selectedValue }: ListBaseProps) => {
+const MealListBase = ({ type }: ListBaseProps) => {
+    const selectedValue = useSelectedList()
     const { data: menu = [], isLoading, isError } = useFilterByTypeQuery(type, selectedValue)
-
     const { currentPage, showPopUp, handleShowPopUp, setSelectedDishId } = useRecipesStore()
+
     const menuList = useMemo(() => {
         const firstIndex = currentPage * itemsPerPage - itemsPerPage;
         const lastIndex = Math.min(currentPage * itemsPerPage, menu.length);

@@ -49,7 +49,6 @@ export type MealHubListProps = {
 
 export type ListBaseProps = {
   type: MealHubListKeyProps;
-  selectedValue: string;
 }
 
 export type PopUpProps = {
@@ -64,11 +63,11 @@ export type RecipesStoreState = {
   mealHubItem: string;
   selectedCategory: string;
   selectedArea: string;
-  selectedIngredient: string;
   currentPage: number;
   selectedDishId: string;
   showPopUp: boolean;
   selectedDish: mealProps;
+  selectedIngredient: string;
   setSelectedDishId: (id: string) => void;
   setSelectedDish: (dish: mealProps) => void;
   setSelectedCategory: (category: string) => void;
@@ -77,5 +76,6 @@ export type RecipesStoreState = {
   setCurrentPage: (page: number) => void;
   setMealHubItem: (type: RecipesStoreState['mealHubItem']) => void;
   handleShowPopUp: (idMeal?: string) => void;
+  closePopUp: () => void;
 }
 

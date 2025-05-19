@@ -10,7 +10,7 @@ const IngredientList = ({ type }: { type: MealHubListKeyProps }) => {
     const { showPopUp, handleShowPopUp } = useRecipesStore()
     const [selectedIngredient, setSelectedIngredient] = useState<PopUpProps>()
 
-    const handleShowPIngredient = (item: ingredientProps) => {
+    const handleShowIngredient = (item: ingredientProps) => {
         setSelectedIngredient({
             id: item.idIngredient,
             description: item.strDescription,
@@ -39,7 +39,7 @@ const IngredientList = ({ type }: { type: MealHubListKeyProps }) => {
                                                     className="w-24 h-24 object-contain"
                                                 />
                                                 <div className="absolute cursor-pointer pl-8 bottom-0 left-0 right-0 bg-black bg-opacity-60 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out rounded-b-lg py-2 text-center"
-                                                    onClick={() => handleShowPIngredient(item)}>
+                                                    onClick={() => handleShowIngredient(item)}>
                                                     Click to view
                                                 </div>
                                                 <h4 className="mt-2 text-sm font-semibold truncate hover:text-orange-600 transition">
