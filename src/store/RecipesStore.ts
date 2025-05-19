@@ -11,7 +11,7 @@ export const useRecipesStore = create<RecipesStoreState>()(persist((set, get) =>
     selectedDish: undefined,
     currentPage: 1,
     selectedDishId: '',
-    showRecipe: false,
+    showPopUp: false,
 
     setMealHubItem: (item) => set({ mealHubItem: item }),
 
@@ -40,8 +40,8 @@ export const useRecipesStore = create<RecipesStoreState>()(persist((set, get) =>
         set({ currentPage: val });
     },
 
-    handleShowRecipe: (idMeal) => set((state) => ({
-        showRecipe: !state.showRecipe,
+    handleShowPopUp: (idMeal) => set((state) => ({
+        showPopUp: !state.showPopUp,
         selectedDishId: idMeal
     }
     )),

@@ -1,18 +1,29 @@
 import { useNavigate } from "react-router-dom";
 import { useMealById } from "../hooks/useFilterQuery";
 import { useRecipesStore } from "../store/RecipesStore";
+import { PopUpProps } from "../types";
 
-const PopUp = () => {
-  const { selectedDishId, handleShowRecipe, setSelectedDish } = useRecipesStore();
+const PopUp = ({ dataToPopUp }: { dataToPopUp?: PopUpProps }) => {
+
+  const { selectedDishId, handleShowPopUp, setSelectedDish } = useRecipesStore();
   const { data: selectedDish, isLoading, isError } = useMealById(selectedDishId)
   const navigate = useNavigate()
+  console.log(dataToPopUp)
+  const popUpData = dataToPopUp || (selectedDish &&
+  {
+    id: selectedDish.idMeal,
+    description: selectedDish.strInstructions,
+    imgSrc: selectedDish.strMealThumb,
+    name: selectedDish.strMeal,
+    type: selectedDish.strCategory
+  })
 
-  if (!selectedDish || isError) return <p>Something went wrong</p>;
+  if (!popUpData || isError) return <p>Something went wrong</p>;
   if (isLoading) return <p>Loading....</p>
 
   const handleShowFullRecipe = () => {
     setSelectedDish(selectedDish)
-    handleShowRecipe()
+    handleShowPopUp()
     navigate(`/view/${selectedDishId}`)
   }
 
@@ -20,22 +31,23 @@ const PopUp = () => {
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
       <div className="bg-white dark:bg-gray-100 rounded-lg shadow-lg w-[90vw] max-w-3xl max-h-[90vh] overflow-hidden flex flex-col">
         <img
-          src={selectedDish.strMealThumb}
-          alt={selectedDish.strMeal}
-          className="w-full p-2 h-[300px] object-cover rounded-t-lg"
+          src={popUpData?.imgSrc}
+          alt={popUpData?.name}
+          className="w-[300px] h-[300px] object-cover rounded-t-lg p-2 mx-auto"
         />
 
         <h2 className="text-lg font-semibold text-center my-2 px-4">
-          {selectedDish.strMeal}
+          <p><strong>Name:</strong> {popUpData.name}</p>
+          {popUpData.type && <p><strong>Category:</strong> {popUpData.type}</p>}
         </h2>
 
-        <div className="overflow-y-auto px-6 py-4 text-sm leading-relaxed text-justify max-h-[calc(90vh-380px)]">
-          {selectedDish.strInstructions}
+        <div className="overflow-y-auto px-6 py-4 text-sm leading-relaxed text-center max-h-[calc(90vh-380px)]">
+          {popUpData?.description || 'No description available'}
         </div>
 
         <div className="flex justify-end gap-1 px-6 py-3">
           <button
-            onClick={() => handleShowRecipe()}
+            onClick={() => handleShowPopUp()}
             className="bg-gray-600 hover:bg-orange-600 text-white px-4 py-2 rounded-md transition"
           >
             Close

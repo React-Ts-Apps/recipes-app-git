@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 const MealListBase = ({ type, selectedValue }: ListBaseProps) => {
     const { data: menu = [], isLoading, isError } = useFilterByTypeQuery(type, selectedValue)
 
-    const { currentPage, showRecipe, handleShowRecipe, setSelectedDishId } = useRecipesStore()
+    const { currentPage, showPopUp, handleShowPopUp, setSelectedDishId } = useRecipesStore()
     const menuList = useMemo(() => {
         const firstIndex = currentPage * itemsPerPage - itemsPerPage;
         const lastIndex = Math.min(currentPage * itemsPerPage, menu.length);
@@ -23,7 +23,7 @@ const MealListBase = ({ type, selectedValue }: ListBaseProps) => {
 
     return (
         <div>
-            {showRecipe && <PopUp />}
+            {showPopUp && <PopUp />}
             <>
                 <div className="flex h-[50vh]">
                     <section className="pl-50  overflow-y-auto">
@@ -37,7 +37,7 @@ const MealListBase = ({ type, selectedValue }: ListBaseProps) => {
                                                     <img src={dish.strMealThumb} alt={dish.strMeal} className="w-full h-auto block" />
                                                     <div
                                                         className="absolute cursor-pointer pl-8 bottom-4 left-0 right-0 bg-black bg-opacity-60 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out rounded-b-lg py-2"
-                                                        onClick={() => handleShowRecipe(dish.idMeal)}
+                                                        onClick={() => handleShowPopUp(dish.idMeal)}
                                                     >
                                                         Click to view
                                                     </div>
