@@ -12,7 +12,6 @@ const MealGroups = ({ type, onItemClick }: MealHubListProps) => {
     const extractName = (item: categoryProps | areaProps | ingredientProps) => {
         if (type === 'categories') return (item as categoryProps).strCategory;
         if (type === 'areas') return (item as areaProps).strArea;
-        if (type === 'ingredients') return (item as ingredientProps).strIngredient;
         return ''
     }
 

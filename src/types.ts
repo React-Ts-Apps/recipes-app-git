@@ -25,7 +25,10 @@ export type areaProps = {
 };
 
 export type ingredientProps = {
+  idIngredient: string;
   strIngredient: string;
+  strDescription: string | null;
+  strType: string | null;
 };
 
 export type MealHubProps = 'categories' | 'areas' | 'ingredients' | 'random';
@@ -41,6 +44,18 @@ export type MealHubListKeyProps = keyof MealHubList;
 export type MealHubListProps = {
   type: MealHubListKeyProps;
   onItemClick: (val: string) => void;
+}
+
+export type ListBaseProps = {
+  type: MealHubListKeyProps;
+  selectedValue: string;
+}
+
+export type PopUpProps = {
+  id: string;
+  description: string;
+  img: string;
+  type: string;
 }
 
 export type RecipesStoreState = {

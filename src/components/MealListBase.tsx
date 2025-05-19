@@ -1,16 +1,13 @@
 import { useMemo } from "react";
 import { useFilterByTypeQuery } from "../hooks/useFilterByTypeQuery";
 import { useRecipesStore } from "../store/RecipesStore";
-import { MealHubListKeyProps } from "../types"
+import { ListBaseProps } from "../types"
 import Pagination from "./Pagination";
 import PopUp from "./PopUp";
 import { ITEMS_PER_PAGE as itemsPerPage } from "../constants";
 import { Link } from "react-router-dom";
 
-type ListBaseProps = {
-    type: MealHubListKeyProps;
-    selectedValue: string;
-}
+
 const MealListBase = ({ type, selectedValue }: ListBaseProps) => {
     const { data: menu = [], isLoading, isError } = useFilterByTypeQuery(type, selectedValue)
 

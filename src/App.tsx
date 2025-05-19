@@ -8,14 +8,15 @@ import Categories from "./components/Categories";
 import Areas from "./components/Areas";
 import MealListBase from "./components/MealListBase";
 import MealDetails from "./components/MealDetails";
+import IngredientList from "./components/IngredientList";
 
 const App = () => {
   const { selectedCategory, selectedArea, mealHubItem } = useRecipesStore();
-
   const getRedirectPath = () => {
     if (mealHubItem === "categories" && selectedCategory) return `/categories/${selectedCategory}/page/1`;
     if (mealHubItem === "areas" && selectedArea) return `/areas/${selectedArea}/page/1`;
     if (mealHubItem === 'random') return '/random';
+    if (mealHubItem === 'ingredients') return '/ingredients'
     return "/";
   };
 
@@ -56,6 +57,7 @@ const App = () => {
 
           <Route path='/random' element={<MealDetails />} />
           <Route path='/view/:id' element={<MealDetails />} />
+          <Route path='/ingredients' element={<IngredientList type="ingredients" />} />
         </Routes>
       </BrowserRouter>
     </div>
