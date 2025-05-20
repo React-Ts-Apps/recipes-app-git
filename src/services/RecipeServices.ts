@@ -1,4 +1,5 @@
 import instance from "../api/axios";
+import { mealProps } from "../types";
 
 export class RecipeServices {
     static async getAllCategories() {
@@ -33,11 +34,44 @@ export class RecipeServices {
 
     static async getMealById(id: string) {
         const res = await instance.get(`/lookup.php?i=${id}`)
-        return res.data.meals[0]
+        return res.data.meals
     }
 
     static async getRandomMeal() {
         const res = await instance.get('/random.php')
-        return res.data.meals[0]
+        return res.data.meals
     }
+
+    static async searchByName(name: string) {
+        const res = await instance.get(`/search.php?s=${name}`)
+        return res.data.meals
+    }
+    static async searchByIngredient(name: string) {
+        const res = await instance.get(`/filter.php?i=${name}`)
+        return res.data.meals
+    }
+    static async searchByNameAndIngredient(query: string) {
+        const [byNameRes, byIngredientRes] = await Promise.all([this.searchByName(query), this.searchByIngredient(query)
+        ])
+        const byName = byNameRes || [];
+        const byIngredient = byIngredientRes || [];
+
+        const combinedMap = new Map<string, mealProps>();
+
+        byName.forEach((meal: mealProps | undefined) => {
+            if (meal?.idMeal) {
+                combinedMap.set(meal.idMeal, meal);
+            }
+        });
+
+        byIngredient.forEach((meal: mealProps | undefined) => {
+            if (meal?.idMeal) {
+                combinedMap.set(meal.idMeal, meal);
+            }
+        });
+        const mergedMeals = Array.from(combinedMap.values());
+
+        return mergedMeals;
+    }
+
 }

@@ -11,18 +11,18 @@ const SideBar = () => {
     const navigate = useNavigate()
 
     //trigger only if random selected
-    const { data: random, isLoading, isError } = useRandomMeal()
+    const { data: randomData, isLoading, isError } = useRandomMeal()
 
     useEffect(() => {
         if (mealHubItem === 'random') {
             if (isLoading) console.log('Loading...')
             else if (isError) console.log('Something went wrong')
-            else if (random) {
-                setSelectedDish(random)
+            else if (randomData) {
+                setSelectedDish(randomData[0])
                 navigate('/random', { replace: true })
             }
         }
-    }, [isError, isLoading, mealHubItem, navigate, random, setSelectedDish])
+    }, [isError, isLoading, mealHubItem, navigate, randomData, setSelectedDish])
 
     const handleHubChange = (item: string) => {
         if (mealHubItem !== item) setMealHubItem(item)

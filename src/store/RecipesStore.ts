@@ -12,7 +12,8 @@ export const useRecipesStore = create<RecipesStoreState>()(persist((set, get) =>
     currentPage: 1,
     selectedDishId: '',
     showPopUp: false,
-
+    searchText: '',
+    setSearchText: (text) => set({ searchText: text, currentPage: 1 }),
     setMealHubItem: (item) => set({ mealHubItem: item }),
 
     setSelectedDish: (meal) => set({ selectedDish: meal }),
@@ -55,6 +56,7 @@ export const useRecipesStore = create<RecipesStoreState>()(persist((set, get) =>
         selectedArea: state.selectedArea,
         selectedCategory: state.selectedCategory,
         selectedIngredient: state.selectedIngredient,
-        currentPage: state.currentPage
+        currentPage: state.currentPage,
+        searchText: state.searchText
     })
 }))
