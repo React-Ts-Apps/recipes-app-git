@@ -51,12 +51,27 @@ export class RecipeServices {
         return res.data.meals
     }
     static async searchByNameAndIngredient(query: string) {
-        const [byName, byIngredient] = await Promise.all([this.searchByName(query),
-        this.searchByIngredient(query)])
-        const combinedMap = new Map()
-        byName.forEach((element: mealProps) => combinedMap.set(element?.idMeal, element))
-        byIngredient.forEach((element: mealProps) => combinedMap.set(element?.idMeal, element))
-        return Array.from(combinedMap.values())
+        const [byNameRes, byIngredientRes] = await Promise.all([this.searchByName(query), this.searchByIngredient(query)
+        ])
+        const byName = byNameRes || [];
+        const byIngredient = byIngredientRes || [];
+
+        const combinedMap = new Map<string, mealProps>();
+
+        byName.forEach((meal: mealProps | undefined) => {
+            if (meal?.idMeal) {
+                combinedMap.set(meal.idMeal, meal);
+            }
+        });
+
+        byIngredient.forEach((meal: mealProps | undefined) => {
+            if (meal?.idMeal) {
+                combinedMap.set(meal.idMeal, meal);
+            }
+        });
+        const mergedMeals = Array.from(combinedMap.values());
+
+        return mergedMeals;
     }
 
 }

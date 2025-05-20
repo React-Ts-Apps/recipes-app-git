@@ -13,7 +13,7 @@ const MealListBase = ({ type }: { type: MealHubProps }) => {
     const selectedValue = useSelectedList()
     const { data: menu = [], isLoading, isError } = useFilterByTypeQuery(type, selectedValue)
     const { currentPage, showPopUp, handleShowPopUp, setSelectedDishId } = useRecipesStore()
-
+    console.log(selectedValue, menu)
     const menuList = useMemo(() => {
         const firstIndex = currentPage * itemsPerPage - itemsPerPage;
         const lastIndex = Math.min(currentPage * itemsPerPage, menu.length);

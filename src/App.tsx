@@ -63,10 +63,13 @@ const App = () => {
           />
           <Route path="/search" element={<RecipeSearch />} />
           <Route
-            path="/search/:searchText"
+            path="/search/:searchText/page/:page"
             element={
               mealHubItem === "search" ? (
-                <MealListBase type="search" />
+                <>
+                  <RecipeSearch />
+                  <MealListBase type="search" />
+                </>
               ) : null
             }
           />
