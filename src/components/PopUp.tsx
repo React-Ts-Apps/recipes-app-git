@@ -7,20 +7,22 @@ const PopUp = ({ dataToPopUp }: { dataToPopUp?: PopUpProps }) => {
   const { selectedDishId, setSelectedDish, setSelectedIngredient, closePopUp, currentPage } = useRecipesStore();
   const { data: selectedDish, isLoading, isError } = useMealById(selectedDishId)
   const navigate = useNavigate()
-  const popUpData = dataToPopUp || (selectedDish &&
+  const dish = selectedDish?.[0];
+
+  const popUpData = dataToPopUp || dish &&
   {
-    id: selectedDish.idMeal,
-    description: selectedDish.strInstructions,
-    imgSrc: selectedDish.strMealThumb,
-    name: selectedDish.strMeal,
-    type: selectedDish.strCategory
-  })
+    id: dish.idMeal,
+    description: dish.strInstructions,
+    imgSrc: dish.strMealThumb,
+    name: dish.strMeal,
+    type: dish.strCategory
+  }
 
   if (!popUpData || isError) return <p>Something went wrong in popup</p>;
   if (isLoading) return <p>Loading....</p>
 
   const handleShowFullRecipe = () => {
-    setSelectedDish(selectedDish)
+    setSelectedDish(selectedDish?.[0])
     closePopUp()
     navigate(`/view/${selectedDishId}`, { replace: true })
   }

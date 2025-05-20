@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query"
-import { MealHubExcludeSearch, MealHubList } from "../types"
+import { MealHubGroups, MealHubGroupsKeys } from "../types"
 import { useRecipesStore } from "../store/RecipesStore"
 import { RecipeServices } from "../services/RecipeServices"
 
 
 
-const listQueryFn = (type: MealHubExcludeSearch) => {
+const listQueryFn = (type: MealHubGroupsKeys) => {
     switch (type) {
         case 'categories': return () => RecipeServices.getAllCategories();
         case 'areas': return () => RecipeServices.getAllAreas();
@@ -14,9 +14,9 @@ const listQueryFn = (type: MealHubExcludeSearch) => {
     }
 }
 
-export const useListQuery = <T extends MealHubExcludeSearch>(type: T) => {
+export const useListQuery = <T extends MealHubGroupsKeys>(type: T) => {
     const { mealHubItem } = useRecipesStore()
-    return useQuery<MealHubList[T]>({
+    return useQuery<MealHubGroups[T]>({
         queryKey: ["groups", type],
         queryFn: listQueryFn(type),
         enabled: mealHubItem === type,

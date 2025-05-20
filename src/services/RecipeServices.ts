@@ -34,12 +34,12 @@ export class RecipeServices {
 
     static async getMealById(id: string) {
         const res = await instance.get(`/lookup.php?i=${id}`)
-        return res.data.meals[0]
+        return res.data.meals
     }
 
     static async getRandomMeal() {
         const res = await instance.get('/random.php')
-        return res.data.meals[0]
+        return res.data.meals
     }
 
     static async searchByName(name: string) {

@@ -5,13 +5,12 @@ import { useMealById } from "../hooks/useFilterQuery";
 
 const MealDetails = () => {
     const { selectedDish } = useRecipesStore()
-
     const { id } = useParams()
     const shouldFetch = !selectedDish || (id && selectedDish.idMeal !== id)
     const { data: fetchedData, isError, isLoading } = useMealById(id!)
     if (isError) return <p>Something went wrong!</p>
     if (isLoading) return <p>Loding....</p>
-    const meal = shouldFetch ? fetchedData : selectedDish
+    const meal = shouldFetch ? fetchedData?.[0] : selectedDish
 
     return (
         meal &&

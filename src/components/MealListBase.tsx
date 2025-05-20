@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { useFilterByTypeQuery } from "../hooks/useFilterByTypeQuery";
 import { useRecipesStore } from "../store/RecipesStore";
-import { ListBaseProps } from "../types"
+import { MealHubProps } from "../types"
 import Pagination from "./Pagination";
 import PopUp from "./PopUp";
 import { ITEMS_PER_PAGE as itemsPerPage } from "../constants";
@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import { useSelectedList } from "../utils/useSelectedList";
 
 
-const MealListBase = ({ type }: ListBaseProps) => {
+const MealListBase = ({ type }: { type: MealHubProps }) => {
     const selectedValue = useSelectedList()
     const { data: menu = [], isLoading, isError } = useFilterByTypeQuery(type, selectedValue)
     const { currentPage, showPopUp, handleShowPopUp, setSelectedDishId } = useRecipesStore()

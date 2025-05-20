@@ -34,24 +34,18 @@ export type ingredientProps = {
 
 export type MealHubProps = 'categories' | 'areas' | 'ingredients' | 'random' | 'search';
 
-export type MealHubList = {
+export type MealHubGroups = {
   categories: categoryProps[];
   areas: areaProps[];
   ingredients: ingredientProps[];
 }
 
-export type MealHubListKeyProps = Exclude<MealHubProps, 'random'>;
-export type MealHubExcludeSearch = Exclude<MealHubListKeyProps, 'search'>
+export type MealHubGroupsKeys = keyof MealHubGroups;
 
-export type ListBaseProps = {
-  type: MealHubListKeyProps;
-}
-
-export type MealHubListProps = ListBaseProps & {
+export type MealHubListProps = {
+  type: MealHubGroupsKeys;
   onItemClick: (val: string) => void;
 }
-
-
 
 export type PopUpProps = {
   id: string;
