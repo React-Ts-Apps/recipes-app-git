@@ -4,6 +4,7 @@ import { useRecipesStore } from "../store/RecipesStore"
 import { MEAL_HUB_ITEMS as mealHubItems } from "../constants"
 import { useNavigate } from "react-router-dom"
 import { useRandomMeal } from "../hooks/useFilterQuery"
+import { MealHubProps } from "../types"
 
 const SideBar = () => {
     const [isOpen, setIsOpen] = useState(true)
@@ -24,7 +25,7 @@ const SideBar = () => {
         }
     }, [isError, isLoading, mealHubItem, navigate, randomData, setSelectedDish])
 
-    const handleHubChange = (item: string) => {
+    const handleHubChange = (item: MealHubProps) => {
         if (mealHubItem !== item) setMealHubItem(item)
         navigate('/', { replace: true })
     }

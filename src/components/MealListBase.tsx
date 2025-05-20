@@ -1,7 +1,6 @@
 import { useMemo } from "react";
 import { useFilterByTypeQuery } from "../hooks/useFilterByTypeQuery";
 import { useRecipesStore } from "../store/RecipesStore";
-import { MealHubProps } from "../types"
 import Pagination from "./Pagination";
 import PopUp from "./PopUp";
 import { ITEMS_PER_PAGE as itemsPerPage } from "../constants";
@@ -9,11 +8,12 @@ import { Link } from "react-router-dom";
 import { useSelectedList } from "../utils/useSelectedList";
 
 
-const MealListBase = ({ type }: { type: MealHubProps }) => {
+const MealListBase = () => {
+    const { mealHubItem, currentPage, showPopUp, handleShowPopUp, setSelectedDishId } = useRecipesStore()
     const selectedValue = useSelectedList()
-    const { data: menu = [], isLoading, isError } = useFilterByTypeQuery(type, selectedValue)
-    const { currentPage, showPopUp, handleShowPopUp, setSelectedDishId } = useRecipesStore()
-    console.log(selectedValue, menu)
+    const { data: menu = [], isLoading, isError } = useFilterByTypeQuery(mealHubItem, selectedValue)
+
+
     const menuList = useMemo(() => {
         const firstIndex = currentPage * itemsPerPage - itemsPerPage;
         const lastIndex = Math.min(currentPage * itemsPerPage, menu.length);

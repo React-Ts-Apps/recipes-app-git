@@ -8,7 +8,6 @@ import Areas from "./components/Areas";
 import MealListBase from "./components/MealListBase";
 import MealDetails from "./components/MealDetails";
 import IngredientList from "./components/IngredientList";
-import RecipeByIngredient from "./components/RecipeByIngredient";
 import RecipeSearch from "./components/RecipeSearch";
 
 const App = () => {
@@ -36,7 +35,7 @@ const App = () => {
             path="/categories/:category/page/:page"
             element={
               mealHubItem === "categories" ? (
-                <MealListBase type="categories" />
+                <MealListBase />
               ) : null
             }
           />
@@ -45,7 +44,7 @@ const App = () => {
             path="/areas/:area/page/:page"
             element={
               mealHubItem === "areas" ? (
-                <MealListBase type="areas" />
+                <MealListBase />
               ) : null
             }
           />
@@ -57,7 +56,7 @@ const App = () => {
             path="/ingredients/:ingredient/page/:page"
             element={
               mealHubItem === "ingredients" ? (
-                <RecipeByIngredient />
+                <MealListBase />
               ) : null
             }
           />
@@ -68,7 +67,7 @@ const App = () => {
               mealHubItem === "search" ? (
                 <>
                   <RecipeSearch />
-                  <MealListBase type="search" />
+                  <MealListBase />
                 </>
               ) : null
             }
