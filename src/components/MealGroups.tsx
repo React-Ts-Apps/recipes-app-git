@@ -1,6 +1,6 @@
 import { useListQuery } from "../hooks/useListQuery"
 import { areaProps, categoryProps, ingredientProps, MealHubListProps } from "../types"
-import { useSelectedList } from "../utils/useSelectedList"
+import { useSelectedList } from "../hooks/useSelectedList"
 
 const MealGroups = ({ type, onItemClick }: MealHubListProps) => {
     const selectedList = useSelectedList()

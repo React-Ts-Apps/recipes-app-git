@@ -5,7 +5,7 @@ import Pagination from "./Pagination";
 import PopUp from "./PopUp";
 import { ITEMS_PER_PAGE as itemsPerPage } from "../constants";
 import { Link } from "react-router-dom";
-import { useSelectedList } from "../utils/useSelectedList";
+import { useSelectedList } from "../hooks/useSelectedList";
 
 
 const MealListBase = () => {

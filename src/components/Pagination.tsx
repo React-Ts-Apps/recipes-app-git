@@ -2,7 +2,7 @@
 import { useNavigate } from "react-router-dom";
 import { ITEMS_PER_PAGE } from "../constants";
 import { useRecipesStore } from "../store/RecipesStore";
-import { useSelectedList } from "../utils/useSelectedList";
+import { useSelectedList } from "../hooks/useSelectedList";
 
 const Pagination = ({ menuLength }: { menuLength: number }) => {
   const { currentPage, setCurrentPage, mealHubItem } = useRecipesStore();
