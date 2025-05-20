@@ -9,6 +9,7 @@ import MealListBase from "./components/MealListBase";
 import MealDetails from "./components/MealDetails";
 import IngredientList from "./components/IngredientList";
 import RecipeByIngredient from "./components/RecipeByIngredient";
+import RecipeSearch from "./components/RecipeSearch";
 
 const App = () => {
   const { selectedCategory, selectedArea, mealHubItem } = useRecipesStore();
@@ -17,6 +18,7 @@ const App = () => {
     if (mealHubItem === "areas" && selectedArea) return `/areas/${selectedArea}/page/1`;
     if (mealHubItem === 'random') return '/random';
     if (mealHubItem === 'ingredients') return '/ingredients'
+    if (mealHubItem === 'search') return '/search'
     return "/";
   };
 
@@ -56,6 +58,15 @@ const App = () => {
             element={
               mealHubItem === "ingredients" ? (
                 <RecipeByIngredient />
+              ) : null
+            }
+          />
+          <Route path="/search" element={<RecipeSearch />} />
+          <Route
+            path="/search/:searchText"
+            element={
+              mealHubItem === "search" ? (
+                <MealListBase type="search" />
               ) : null
             }
           />

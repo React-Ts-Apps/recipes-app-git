@@ -1,4 +1,5 @@
 import instance from "../api/axios";
+import { mealProps } from "../types";
 
 export class RecipeServices {
     static async getAllCategories() {
@@ -40,4 +41,22 @@ export class RecipeServices {
         const res = await instance.get('/random.php')
         return res.data.meals[0]
     }
+
+    static async searchByName(name: string) {
+        const res = await instance.get(`/search.php?s=${name}`)
+        return res.data.meals
+    }
+    static async searchByIngredient(name: string) {
+        const res = await instance.get(`/filter.php?i=${name}`)
+        return res.data.meals
+    }
+    static async searchByNameAndIngredient(query: string) {
+        const [byName, byIngredient] = await Promise.all([this.searchByName(query),
+        this.searchByIngredient(query)])
+        const combinedMap = new Map()
+        byName.forEach((element: mealProps) => combinedMap.set(element?.idMeal, element))
+        byIngredient.forEach((element: mealProps) => combinedMap.set(element?.idMeal, element))
+        return Array.from(combinedMap.values())
+    }
+
 }

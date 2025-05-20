@@ -32,7 +32,7 @@ export type ingredientProps = {
   imgSrc: string;
 };
 
-export type MealHubProps = 'categories' | 'areas' | 'ingredients' | 'random';
+export type MealHubProps = 'categories' | 'areas' | 'ingredients' | 'random' | 'search';
 
 export type MealHubList = {
   categories: categoryProps[];
@@ -40,16 +40,18 @@ export type MealHubList = {
   ingredients: ingredientProps[];
 }
 
-export type MealHubListKeyProps = keyof MealHubList;
-
-export type MealHubListProps = {
-  type: MealHubListKeyProps;
-  onItemClick: (val: string) => void;
-}
+export type MealHubListKeyProps = Exclude<MealHubProps, 'random'>;
+export type MealHubExcludeSearch = Exclude<MealHubListKeyProps, 'search'>
 
 export type ListBaseProps = {
   type: MealHubListKeyProps;
 }
+
+export type MealHubListProps = ListBaseProps & {
+  onItemClick: (val: string) => void;
+}
+
+
 
 export type PopUpProps = {
   id: string;
@@ -68,6 +70,8 @@ export type RecipesStoreState = {
   showPopUp: boolean;
   selectedDish: mealProps;
   selectedIngredient: string;
+  searchText: string;
+  setSearchText: (search: string) => void;
   setSelectedDishId: (id: string) => void;
   setSelectedDish: (dish: mealProps) => void;
   setSelectedCategory: (category: string) => void;

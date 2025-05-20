@@ -2,10 +2,10 @@ import { useState } from "react";
 import { SMALL_IMG_URL } from "../api/urls";
 import { useListQuery } from "../hooks/useListQuery"
 import { useRecipesStore } from "../store/RecipesStore";
-import { ingredientProps, MealHubListKeyProps, PopUpProps } from "../types"
+import { ingredientProps, MealHubExcludeSearch, PopUpProps } from "../types"
 import PopUp from "./PopUp";
 
-const IngredientList = ({ type }: { type: MealHubListKeyProps }) => {
+const IngredientList = ({ type }: { type: MealHubExcludeSearch }) => {
     const { data: groups } = useListQuery(type) as { data: ingredientProps[] }
     const { showPopUp, handleShowPopUp } = useRecipesStore()
     const [selectedIngredient, setSelectedIngredient] = useState<PopUpProps>()

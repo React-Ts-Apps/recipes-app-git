@@ -7,6 +7,7 @@ const getQueryFn = (type: MealHubListKeyProps, value: string) => {
         case 'categories': return () => RecipeServices.getByCategory(value);
         case 'areas': return () => RecipeServices.getByArea(value);
         case 'ingredients': return () => RecipeServices.getByIngredient(value);
+        case 'search': return () => RecipeServices.searchByNameAndIngredient(value);
         default: throw new Error('Invalid type');
     }
 };
