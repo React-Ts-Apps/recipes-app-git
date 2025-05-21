@@ -13,12 +13,13 @@ Welcome to the **Recipes App** — a sleek and lightweight web app built with **
 ## 🚀 Features
 
 - ⚛️ Built with React 19
-- 🔷 Written in TypeScript
-- ⚡ Powered by Vite for blazing-fast builds
-- 🌐 Fetches recipe data using Axios
-- 💅 Styled with Sass
-- 🧹 Code linting with ESLint
-- 🔗 Deployed in Render
+- 🔷 Written in TypeScript and React
+- 🧠 State management using Zustand
+- ⚡ Powered by Vite for blazing-fast development and builds
+- 🌐 Data fetching with Axios and TanStack Query
+- 💅 Styled with Tailwind CSS
+- 🧹 Code quality ensured with ESLint
+- 🔗 Deployed on Render
 
 ---
 
@@ -51,9 +52,12 @@ npm run preview
 ### 🧰 7. Tech Stack
 - React 19
 - TypeScript
+- React
 - Vite 6
 - Axios
-- Sass
+- Tanstack
+- Zustand
+- Tailwind CSS
  ### 🔗 8. Deploy
 - Deploy using render. For more details visit: https://render.com/
 
