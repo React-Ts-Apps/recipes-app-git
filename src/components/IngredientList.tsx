@@ -2,15 +2,22 @@ import { useState } from "react";
 import { SMALL_IMG_URL } from "../api/urls";
 import { useListQuery } from "../hooks/useListQuery"
 import { useRecipesStore } from "../store/RecipesStore";
-import { ingredientProps, MealHubGroupsKeys, PopUpProps } from "../types"
+import { IngredientProps, MealHubGroupsKeys, PopUpProps } from "../types"
 import PopUp from "./PopUp";
+import RecipeLoader from "./RecipeLoader";
+import ErrorLoader from "./ErrorLoader";
+
+type IngredientListProps = {
+    data: IngredientProps[]; isLoading: boolean;
+    isError: boolean;
+}
 
 const IngredientList = ({ type }: { type: MealHubGroupsKeys }) => {
-    const { data: groups } = useListQuery(type) as { data: ingredientProps[] }
+    const { data: groups = [], isLoading, isError } = useListQuery(type) as IngredientListProps
     const { showPopUp, handleShowPopUp } = useRecipesStore()
     const [selectedIngredient, setSelectedIngredient] = useState<PopUpProps>()
 
-    const handleShowIngredient = (item: ingredientProps) => {
+    const handleShowIngredient = (item: IngredientProps) => {
         setSelectedIngredient({
             id: item.idIngredient,
             description: item.strDescription,
@@ -20,6 +27,8 @@ const IngredientList = ({ type }: { type: MealHubGroupsKeys }) => {
         });
         handleShowPopUp()
     }
+    if (isLoading) return <RecipeLoader message='Loading..' />
+    if (isError) return <ErrorLoader message='Something went wrong..' />
 
     return (
         <div>

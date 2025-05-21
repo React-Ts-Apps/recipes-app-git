@@ -1,5 +1,5 @@
 import instance from "../api/axios";
-import { mealProps } from "../types";
+import { MealProps } from "../types";
 
 export class RecipeServices {
     static async getAllCategories() {
@@ -56,15 +56,15 @@ export class RecipeServices {
         const byName = byNameRes || [];
         const byIngredient = byIngredientRes || [];
 
-        const combinedMap = new Map<string, mealProps>();
+        const combinedMap = new Map<string, MealProps>();
 
-        byName.forEach((meal: mealProps | undefined) => {
+        byName.forEach((meal: MealProps | undefined) => {
             if (meal?.idMeal) {
                 combinedMap.set(meal.idMeal, meal);
             }
         });
 
-        byIngredient.forEach((meal: mealProps | undefined) => {
+        byIngredient.forEach((meal: MealProps | undefined) => {
             if (meal?.idMeal) {
                 combinedMap.set(meal.idMeal, meal);
             }

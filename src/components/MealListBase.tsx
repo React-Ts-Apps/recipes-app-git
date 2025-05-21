@@ -6,22 +6,23 @@ import PopUp from "./PopUp";
 import { ITEMS_PER_PAGE as itemsPerPage } from "../constants";
 import { Link } from "react-router-dom";
 import { useSelectedList } from "../hooks/useSelectedList";
+import RecipeLoader from "./RecipeLoader";
+import ErrorLoader from "./ErrorLoader";
 
 
 const MealListBase = () => {
     const { mealHubItem, currentPage, showPopUp, handleShowPopUp, setSelectedDishId } = useRecipesStore()
     const selectedValue = useSelectedList()
     const { data: menu = [], isLoading, isError } = useFilterByTypeQuery(mealHubItem, selectedValue)
-
-
     const menuList = useMemo(() => {
         const firstIndex = currentPage * itemsPerPage - itemsPerPage;
         const lastIndex = Math.min(currentPage * itemsPerPage, menu.length);
         return menu.slice(firstIndex, lastIndex);
     }, [currentPage, menu]);
 
-    if (isLoading) return <p>Loading....</p>
-    if (isError) return <p>Something went wrong</p>
+    if (isLoading) return <RecipeLoader message='Loading..' />
+    if (isError) return <ErrorLoader message='Something went wrong..' />
+
 
     return (
         <div>

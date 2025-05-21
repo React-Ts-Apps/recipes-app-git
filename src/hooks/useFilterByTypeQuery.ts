@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { RecipeServices } from "../services/RecipeServices";
-import { MealHubProps, mealProps } from "../types";
+import { MealHubProps, MealProps } from "../types";
 
 const getQueryFn = (type: MealHubProps, value: string) => {
     switch (type) {
@@ -13,7 +13,7 @@ const getQueryFn = (type: MealHubProps, value: string) => {
 };
 
 export const useFilterByTypeQuery = (filterType: MealHubProps, value: string) => {
-    return useQuery<mealProps[]>({
+    return useQuery<MealProps[]>({
         queryKey: ["menu", filterType, value],
         queryFn: getQueryFn(filterType, value),
         enabled: !!value,

@@ -1,17 +1,20 @@
 import { useListQuery } from "../hooks/useListQuery"
-import { areaProps, categoryProps, ingredientProps, MealHubListProps } from "../types"
+import { AreaProps, CategoryProps, IngredientProps, MealHubListProps } from "../types"
 import { useSelectedList } from "../hooks/useSelectedList"
+import RecipeLoader from "./RecipeLoader"
+import ErrorLoader from "./ErrorLoader"
 
 const MealGroups = ({ type, onItemClick }: MealHubListProps) => {
     const selectedList = useSelectedList()
     const { data: groups = [], isError, isLoading } = useListQuery(type)
 
-    if (isLoading) return <p>Loading...</p>
-    if (isError) return <p>Something went wrong...</p>
+    if (isLoading) return <RecipeLoader message='Loading..' />
+    if (isError) return <ErrorLoader message='Something went wrong..' />
 
-    const extractName = (item: categoryProps | areaProps | ingredientProps) => {
-        if (type === 'categories') return (item as categoryProps).strCategory;
-        if (type === 'areas') return (item as areaProps).strArea;
+
+    const extractName = (item: CategoryProps | AreaProps | IngredientProps) => {
+        if (type === 'categories') return (item as CategoryProps).strCategory;
+        if (type === 'areas') return (item as AreaProps).strArea;
         return ''
     }
 
