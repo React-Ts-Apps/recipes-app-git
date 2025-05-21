@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { useMealById } from "../hooks/useFilterQuery";
 import { useRecipesStore } from "../store/RecipesStore";
 import { PopUpProps } from "../types";
+import RecipeLoader from "./RecipeLoader";
+import ErrorLoader from "./ErrorLoader";
 
 const PopUp = ({ dataToPopUp }: { dataToPopUp?: PopUpProps }) => {
   const { selectedDishId, setSelectedDish, setSelectedIngredient, closePopUp, currentPage } = useRecipesStore();
@@ -18,8 +20,9 @@ const PopUp = ({ dataToPopUp }: { dataToPopUp?: PopUpProps }) => {
     type: dish.strCategory
   }
 
-  if (!popUpData || isError) return <p>Something went wrong in popup</p>;
-  if (isLoading) return <p>Loading....</p>
+  if (isLoading) return <RecipeLoader message='Loading..' />
+  if (!popUpData || isError) return <ErrorLoader message='Something went wrong..' />
+
 
   const handleShowFullRecipe = () => {
     setSelectedDish(selectedDish?.[0])

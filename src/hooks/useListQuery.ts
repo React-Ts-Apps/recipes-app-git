@@ -3,8 +3,6 @@ import { MealHubGroups, MealHubGroupsKeys } from "../types"
 import { useRecipesStore } from "../store/RecipesStore"
 import { RecipeServices } from "../services/RecipeServices"
 
-
-
 const listQueryFn = (type: MealHubGroupsKeys) => {
     switch (type) {
         case 'categories': return () => RecipeServices.getAllCategories();

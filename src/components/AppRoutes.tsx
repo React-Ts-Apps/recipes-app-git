@@ -1,13 +1,24 @@
-import { Route, Routes } from "react-router-dom"
+import { Navigate, Route, Routes } from "react-router-dom"
 import { useRecipesStore } from "../store/RecipesStore"
 import MealListBase from "./MealListBase"
 import MealDetails from "./MealDetails"
 import IngredientList from "./IngredientList"
+import RecipeSearch from "./RecipeSearch"
 
 const AppRoutes = () => {
-    const { mealHubItem } = useRecipesStore()
+    const { mealHubItem, selectedCategory, selectedArea } = useRecipesStore()
+
+    const getRedirectPath = () => {
+        if (mealHubItem === "categories" && selectedCategory) return `/categories/${selectedCategory}/page/1`;
+        if (mealHubItem === "areas" && selectedArea) return `/areas/${selectedArea}/page/1`;
+        if (mealHubItem === 'random') return '/random';
+        if (mealHubItem === 'ingredients') return '/ingredients'
+        if (mealHubItem === 'search') return '/search'
+        return "/";
+    }
     return (
         <Routes>
+            <Route path="/" element={<Navigate to={getRedirectPath()} replace />} />
             <Route path="/categories/:category/page/:page" element={
                 mealHubItem === "categories" ? (
                     <MealListBase />
@@ -29,9 +40,13 @@ const AppRoutes = () => {
                 ) : null
             }
             />
+            <Route path='/search' element={<RecipeSearch />} />
             <Route path="/search/:searchText/page/:page" element={
                 mealHubItem === "search" ? (
-                    <MealListBase />
+                    <>
+                        <RecipeSearch />
+                        <MealListBase />
+                    </>
                 ) : null
             }
             />

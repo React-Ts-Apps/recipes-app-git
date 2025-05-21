@@ -1,6 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useRecipesStore } from "../store/RecipesStore";
 import { useMealById } from "../hooks/useFilterQuery";
+import RecipeLoader from "./RecipeLoader";
+import ErrorLoader from "./ErrorLoader";
 
 
 const MealDetails = () => {
@@ -8,8 +10,9 @@ const MealDetails = () => {
     const { id } = useParams()
     const shouldFetch = !selectedDish || (id && selectedDish.idMeal !== id)
     const { data: fetchedData, isError, isLoading } = useMealById(id!)
-    if (isError) return <p>Something went wrong!</p>
-    if (isLoading) return <p>Loding....</p>
+    if (isLoading) return <RecipeLoader message='Loading..' />
+    if (isError) return <ErrorLoader message='Something went wrong..' />
+
     const meal = shouldFetch ? fetchedData?.[0] : selectedDish
 
     return (

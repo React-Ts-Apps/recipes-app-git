@@ -1,5 +1,5 @@
 
-export type mealProps =
+export type MealProps =
   | {
     strMeal: string;
     idMeal: string;
@@ -16,15 +16,15 @@ export type mealProps =
   | undefined;
 
 
-export type categoryProps = {
+export type CategoryProps = {
   strCategory: string;
 };
 
-export type areaProps = {
+export type AreaProps = {
   strArea: string;
 };
 
-export type ingredientProps = {
+export type IngredientProps = {
   idIngredient: string;
   strIngredient: string;
   strDescription: string;
@@ -35,9 +35,9 @@ export type ingredientProps = {
 export type MealHubProps = 'categories' | 'areas' | 'ingredients' | 'random' | 'search';
 
 export type MealHubGroups = {
-  categories: categoryProps[];
-  areas: areaProps[];
-  ingredients: ingredientProps[];
+  categories: CategoryProps[];
+  areas: AreaProps[];
+  ingredients: IngredientProps[];
 }
 
 export type MealHubGroupsKeys = keyof MealHubGroups;
@@ -62,12 +62,12 @@ export type RecipesStoreState = {
   currentPage: number;
   selectedDishId: string;
   showPopUp: boolean;
-  selectedDish: mealProps;
+  selectedDish: MealProps;
   selectedIngredient: string;
   searchText: string;
   setSearchText: (search: string) => void;
   setSelectedDishId: (id: string) => void;
-  setSelectedDish: (dish: mealProps) => void;
+  setSelectedDish: (dish: MealProps) => void;
   setSelectedCategory: (category: string) => void;
   setSelectedArea: (area: string) => void;
   setSelectedIngredient: (ing: string) => void;

@@ -5,6 +5,8 @@ import { MEAL_HUB_ITEMS as mealHubItems } from "../constants"
 import { useNavigate } from "react-router-dom"
 import { useRandomMeal } from "../hooks/useFilterQuery"
 import { MealHubProps } from "../types"
+import RecipeLoader from "./RecipeLoader"
+import ErrorLoader from "./ErrorLoader"
 
 const SideBar = () => {
     const [isOpen, setIsOpen] = useState(true)
@@ -15,15 +17,15 @@ const SideBar = () => {
     const { data: randomData, isLoading, isError } = useRandomMeal()
 
     useEffect(() => {
-        if (mealHubItem === 'random') {
-            if (isLoading) console.log('Loading...')
-            else if (isError) console.log('Something went wrong')
-            else if (randomData) {
-                setSelectedDish(randomData[0])
-                navigate('/random', { replace: true })
-            }
+        if (mealHubItem === 'random' && randomData?.[0]) {
+            setSelectedDish(randomData[0])
+            navigate('/random', { replace: true })
         }
-    }, [isError, isLoading, mealHubItem, navigate, randomData, setSelectedDish])
+    }, [mealHubItem, navigate, randomData, setSelectedDish])
+
+
+    if (isLoading) return <RecipeLoader message='Loading..' />
+    if (isError) return <ErrorLoader message='Something went wrong..' />
 
     const handleHubChange = (item: MealHubProps) => {
         if (mealHubItem !== item) setMealHubItem(item)
